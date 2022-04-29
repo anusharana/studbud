@@ -1,0 +1,19 @@
+{
+  "name": "studbud",
+  "version": "1.0.0",
+  "description": "Web appliction to manage study sessions for Year 9-12 students.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anusharana/studbud.git"
+  },
+  "author": "Anusha Rana",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anusharana/studbud/issues"
+  },
+  "homepage": "https://github.com/anusharana/studbud#readme"
+}
