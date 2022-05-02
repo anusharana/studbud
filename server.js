@@ -6,12 +6,13 @@ const express = require('express');
 const app = express();
 
 //Serve static files from the public folder:
-app.use(express.static('public'));
+// app.use(express.static('dist')); - Installing Parcel Debugging
+app.use(express.static(__dirname + '/dist'));
 
 // Use the get request 
 // res = response > send a file from the public folder 
 app.get('/', function(req, res) {
-    res.sendFile(__dirname + '/public/index.html')
+    res.sendFile(__dirname + '/dist/index.html')
    })
 
 // Start the server, let the server listen out for port 8888
