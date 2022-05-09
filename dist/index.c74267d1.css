@@ -1,9 +1,57 @@
 body {
-  background-color: #00f;
+  background-color: #fafafa;
 }
 
-nav {
+.nav-bar {
   display: flex;
+}
+
+.nav-bar #nav-line {
+  width: 80px;
+  height: 10px;
+  color: #000;
+}
+
+.grid-container {
+  grid-template: "header header header" .7fr
+                 "nav-bar nav-bar nav-bar" .8fr
+                 "studbud-bar studbud-bar studbud-bar" 1fr
+                 "pomodoro-timer pomodoro-timer pomodoro-timer" 1fr
+                 "progress-bar progress-bar progress-bar" .5fr
+                 "kanban-board kanban-board kanban-board" 2fr
+                 "footer footer footer" 1fr
+                 / 1fr 2.5fr 1fr;
+  grid-auto-flow: row;
+  gap: 1px;
+  display: grid;
+}
+
+.header {
+  grid-area: header;
+}
+
+.nav-bar {
+  grid-area: nav-bar;
+}
+
+.studbud-bar {
+  grid-area: studbud-bar;
+}
+
+.pomodoro-timer {
+  grid-area: pomodoro-timer;
+}
+
+.progress-bar {
+  grid-area: progress-bar;
+}
+
+.kanban-board {
+  grid-area: kanban-board;
+}
+
+.footer {
+  grid-area: footer;
 }
 
 /*# sourceMappingURL=index.c74267d1.css.map */
