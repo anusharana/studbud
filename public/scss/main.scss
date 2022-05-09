@@ -1,34 +1,56 @@
 @import 'layout';
 @import 'navigation';
 
-.grid-container {  display: grid;
-    grid-template-columns: 1fr 2.5fr 1fr;
-    grid-template-rows: 0.7fr 0.8fr 1fr 1fr 0.5fr 2fr 1fr;
-    gap: 1px 1px;
-    grid-auto-flow: row;
-    grid-template-areas:
-      "header header header"
-      "nav-bar nav-bar nav-bar"
-      "studbud-bar studbud-bar studbud-bar"
-      "pomodoro-timer pomodoro-timer pomodoro-timer"
-      "progress-bar progress-bar progress-bar"
-      "kanban-board kanban-board kanban-board"
-      "footer footer footer";
-  }
+
+// .grid-container {  display: grid;
+//     grid-template-columns: 1fr 2.5fr 1fr;
+//     grid-template-rows: 0.7fr 0.8fr 1fr 1fr 0.5fr 2fr 1fr;
+//     gap: 1px 1px;
+//     grid-auto-flow: row;
+//     grid-template-areas:
+//       "header header header"
+//       "nav-bar nav-bar nav-bar"
+//       "studbud-bar studbud-bar studbud-bar"
+//       "pomodoro-timer pomodoro-timer pomodoro-timer"
+//       "progress-bar progress-bar progress-bar"
+//       "kanban-board kanban-board kanban-board"
+//       "footer footer footer";
+//   }
   
-  .header { grid-area: header; 
+.header { grid-area: header; 
+
+  }
+
+.nav-bar { 
+  // grid-area: nav-bar;
+
+    #nav-line {
+
+      width: 80vw;
+      height: 1vh;
+
+      color: #212943;
+    
+    }
+
+    #nav-toggle {
 
     }
-  
-  .nav-bar { grid-area: nav-bar; }
-  
-  .studbud-bar { grid-area: studbud-bar; }
-  
-  .pomodoro-timer { grid-area: pomodoro-timer; }
-  
-  .progress-bar { grid-area: progress-bar; }
-  
-  .kanban-board { grid-area: kanban-board; }
-  
-  .footer { grid-area: footer; }
+
+    .nav-title {
+      display: flexbox;
+
+    }
+      
+}
+
+.studbud-bar { grid-area: studbud-bar; }
+
+.pomodoro-timer { grid-area: pomodoro-timer; }
+
+.progress-bar { grid-area: progress-bar; }
+
+.kanban-board { grid-area: kanban-board; }
+
+.footer { grid-area: footer; }
   
