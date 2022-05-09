@@ -23,38 +23,4 @@ body {
   font-size: .8rem;
 }
 
-.header {
-  grid-area: header;
-}
-
-.nav-bar #nav-line {
-  width: 80vw;
-  height: 1vh;
-  color: #212943;
-}
-
-.nav-bar .nav-title {
-  display: flexbox;
-}
-
-.studbud-bar {
-  grid-area: studbud-bar;
-}
-
-.pomodoro-timer {
-  grid-area: pomodoro-timer;
-}
-
-.progress-bar {
-  grid-area: progress-bar;
-}
-
-.kanban-board {
-  grid-area: kanban-board;
-}
-
-.footer {
-  grid-area: footer;
-}
-
 /*# sourceMappingURL=index.c74267d1.css.map */

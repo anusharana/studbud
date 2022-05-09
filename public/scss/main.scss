@@ -17,40 +17,23 @@
 //       "footer footer footer";
 //   }
   
-.header { grid-area: header; 
+// .header { grid-area: header; 
 
-  }
+//   }
 
-.nav-bar { 
-  // grid-area: nav-bar;
+// .nav-bar { 
+//   grid-area: nav-bar;
 
-    #nav-line {
-
-      width: 80vw;
-      height: 1vh;
-
-      color: #212943;
-    
-    }
-
-    #nav-toggle {
-
-    }
-
-    .nav-title {
-      display: flexbox;
-
-    }
       
-}
+// }
 
-.studbud-bar { grid-area: studbud-bar; }
+// .studbud-bar { grid-area: studbud-bar; }
 
-.pomodoro-timer { grid-area: pomodoro-timer; }
+// .pomodoro-timer { grid-area: pomodoro-timer; }
 
-.progress-bar { grid-area: progress-bar; }
+// .progress-bar { grid-area: progress-bar; }
 
-.kanban-board { grid-area: kanban-board; }
+// .kanban-board { grid-area: kanban-board; }
 
-.footer { grid-area: footer; }
+// .footer { grid-area: footer; }
   
