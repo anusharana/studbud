@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Hello, world!</title>
+  <title>StudBud</title>
+
+  <!-- Link to favicon  -->
+  <link rel="icon" type="image/x-icon" href="/Favicon.41b8ec00.png">
 
   <meta charset="UTF-8">
 
@@ -9,98 +12,177 @@
 
   <meta name="description" content="">
 
-  <!-- <link rel="icon" href="img/favicon.png"> -->
+  <!-- Link to Google Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
+  <!-- Link to Google Fonts  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Genos:ital,wght@0,400;0,500;1,400;1,500&family=Nunito:wght@200;300;400;500;700&family=Oswald:wght@400;500&family=Pragati+Narrow:wght@400;700&family=Puritan:wght@400;700&family=Teko:wght@400;500&display=swap" rel="stylesheet">
+  
+  <!-- Link to stylesheet  -->
   <link rel="stylesheet" href="/index.c74267d1.css">
 
 </head>
-<body>
-<!-- <div class="modal">
-  content
-</div> -->
 
-  <div class="grid-container">
-    <div class="header"></div>
+<body onload="pomodoro()">
 
-    <div class="nav-bar">  
+  <div class="header">
 
-      <div class="nav-title"> 
-        <h3>FLASHCARDS</h3>     
-        <h3>HOME</h3>
-        <h3>APPS</h3>
-      </div>    
-      <div id="nav-toggle"> </div>
-      <div id="nav-line"> </div>  
+    <!-- Logo -->
+    <a class="logo">
+      <img src="/Studbud_Logo.504393d8.png" alt="StudBud Logo">
+    </a>
+  </div>
+
+  <nav class="nav-bar">  
+
+    <div class="nav-title"> 
+      <!-- Active class to determine where the toggle bar will be  -->
+      <h3 class="active">HOME</h3>
+      <h3>APPS</h3>
+    </div> 
+
+    <!-- <div id = "nav-toggle"> </div> -->
+    <div id="nav-line"> </div>  
   
+  </nav>
+
+<!-- Create a flexbox for the two main columns named row  -->
+
+<div class="row">
+
+<!-- Split the content into two classes named column -->
+<!-- Column 1 -->
+ <div id="column-1">
+
+  <div class="studbud-section">
+    <h3>YOUR STUDBUD</h3>
+    <p>Set your intention to stay focussed during your study session. Do the prompts at the end for extra revision! </p>
+    <div class="studbud-bar">
+      <p>What is your intention for todays study session?</p>
+      <p>CLICK TO TYPE</p>
+
+      <!-- COME BACK - Create a form??  -->
+
+    </div>
+  </div> 
+
+
+  <div class="pomodoro-section">
+
+    <h3>POMODORO TIMER</h3>
+    <p>Start the timer to begin your pomodoro study session. A timer will go off at each break.</p>
+    
+    <!--   Element for the timer complete notification -->
+    <h4 id="timer_complete"> </h4>
+      
+    <div class="timer">
+
+      <div class="timer-section">
+      
+        <h4 id="timer_minutes"></h4>
+        <h4>:</h4>
+        <h4 id="timer_seconds"></h4>
+
+      </div> 
+
+      <div class="button-section">
+      
+        <!-- Control Button - Start and Pause -->
+        <button type="button" onclick="start_btn()" class="timer-btn timer-btn_control timer-btn_start">
+          <span class="material-icons">play_arrow</span>    
+        </button>
+
+        <!-- Reset timer button -->
+        <button type="button" onclick="reset_btn()" class="timer-btn timer-btn_reset">
+          <span class="material-icons">restart_alt</span>    
+        </button>
+      </div>
     
     </div>
 
-
-    <div class="studbud-bar"></div>
-    <div class="pomodoro-timer"></div>
-    <div class="progress-bar"></div>
-    <div class="kanban-board">
-
-      <div class="task-grid">
-        <form id="taskform"> 
-        <label for="task">Task:</label>
-          <input type="text" name="task" id="taskInput">
-          
-          <br>
-        <!--   Date Input -->
-          <label for="dueDate"> Due Date </label>
-          <input type="date" name="dueDate" id="dueDateInput">
-            
-          <br>
-            
-        <!--     Subject Selection -->
-          <label for="Subject">Select subject:</label>
-        
-          <select name="subjectSelect" id="subjectInput"> 
-              <option value="">Select one </option>
-        
-          
-          </select>  
-          <button type="addNewSubject"> </button>
-          
-          <br>
-      
-          <!--Priority--> 
-          <label for="Priority">Task Priority: </label>
-          <select name="priority" id="priorityInput">
-        <!--       Set a default option -->
-              <option value="">Select one</option>
-              <option value="Low"> Low </option>
-              <option value="Medium"> Medium </option>
-              <option value="High"> High </option>
-          </select>
-      
-      
-          <br>
-          <button type="submit"> Submit </button>
-      
-          <div id="tasklist">
-            <p id="emptyList"> You have not added any tasks yet</p>
-           
-          </div>
-          <ul></ul>
-      
-        </form>
-          
-        <!--   Location to add any extra HTML to populate the content that we have just created in array 'taskList' -->
-        <ul id="tasklist">
-          
-        </ul>
-          
-       <!-- task grid div              -->
-      </div>
-  <!-- kanban board div -->
-    </div>
-  <!-- Grid containter div -->
+    <!-- END DIV POMODORO TIMER  -->
   </div>
 
+<!-- End div column 1 -->
+</div> 
+
+
+ <div id="column-2"> 
+
+  <div class="progress-section">
+    <h3>PROGRESS BAR</h3>
+    <p>Progress bar will fill as you complete your tasks in the KANBAN board below.</p>
+
+  </div>
+
+
+  <div class="kanban-board">
+
+
+    <div class="task-grid">
+      <form id="taskform"> 
+      <label for="task">Task:</label>
+        <input type="text" name="task" id="taskInput">
+        
+        <!-- <br> -->
+      <!--   Date Input -->
+        <label for="dueDate"> Due Date </label>
+        <input type="date" name="dueDate" id="dueDateInput">
+          
+        <br>
+          
+      <!--     Subject Selection -->
+        <label for="Subject">Select subject:</label>
+      
+        <select name="subjectSelect" id="subjectInput"> 
+            <option value="">Select one </option>
+      
+        
+        </select>  
+        <button type="addNewSubject"> </button>
+        
+        <br>
+    
+        <!--Priority--> 
+        <label for="Priority">Task Priority: </label>
+        <select name="priority" id="priorityInput">
+      <!--       Set a default option -->
+            <option value="">Select one</option>
+            <option value="Low"> Low </option>
+            <option value="Medium"> Medium </option>
+            <option value="High"> High </option>
+        </select>
+    
+    
+        <br>
+        <button type="submit"> Submit </button>
+    
+        <div id="tasklist">
+          <p id="emptyList"> You have not added any tasks yet</p>
+          
+        </div>
+        <ul></ul>
+    
+      </form>
+        
+      <!--   Location to add any extra HTML to populate the content that we have just created in array 'taskList' -->
+      <ul id="tasklist">
+        
+      </ul>
+        
+      <!-- task grid div              -->
+    </div>
+  <!-- kanban board div -->
+  </div>
+
+ </div>  
+
+</div>
 </body>
 
-<script src="/index.f3bd186e.js"></script>
+<script src="/index.3b06b0f7.js" defer=""></script>
+
 
 </html>

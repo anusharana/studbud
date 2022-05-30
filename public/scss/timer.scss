@@ -1,0 +1,87 @@
+/* Entire timer section */
+.timer {
+    background: white;
+    margin: 24px;
+
+    font-family: sans-serif;
+    display: inline-block;
+    /*   display: flex;
+    flex-direction: row; */
+    padding: 24px 32px;
+    border-radius: 7px;
+
+    border-style: solid;
+    border-color: #212943; 
+    border-width: 0.5px;
+    
+}
+  
+  /* Minutes and Seconds of timer */
+.timer-section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+h4 {
+    font-family: 'Nunito';
+    font-weight: 400; 
+    font-size: 2rem;
+    font-weight: bold;    
+
+}
+  
+  
+/* Styling the button section */
+.button-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Styling the buttons themselves */
+.timer-btn {
+    width: 3rem;
+    height: 3rem;
+    margin-left: 0.5rem;
+    border-radius: 50%;
+    border: none;
+    background: white;
+    color: #7C99FC;
+    cursor: pointer;
+    
+  }
+  
+.timer-btn_start {
+    color: #7CFC95;
+  
+}
+
+//Need to add this class using javascript 
+.timer-btn_stop{
+    color: #FC7C7C;
+}
+
+.timer_complete_message {
+    display: block;
+    padding: 1rem;
+    background: #7C99FC; 
+    color: white; 
+    border-radius: 0.5rem;
+    text-align: center;  
+  
+    font-family: 'Nunito';
+    font-weight: 300;  
+  
+    // Position of message
+    z-index: 2;
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+    
+    // Animations for the timer 
+    transform: translate(0%,50%);
+    transition: 0.5s ease;
+  
+}

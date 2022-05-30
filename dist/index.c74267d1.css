@@ -2,15 +2,33 @@ body {
   background-color: #fafafa;
 }
 
+.row {
+  grid-template: "column1 column2" 1fr
+  / 1fr 1fr;
+  display: grid;
+}
+
+#column-1 {
+  max-width: 300px;
+  grid-area: column1;
+  margin: 0 auto;
+}
+
+#column-2 {
+  max-width: 300px;
+  grid-area: column2;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 600px) {
+  .row {
+    flex-direction: column;
+  }
+}
+
 .nav-bar #nav-line {
   height: .1vh;
   opacity: .5;
-  background: #212943;
-}
-
-.nav-bar #nav-toggle {
-  height: .5vh;
-  width: 35vw;
   background: #212943;
 }
 
@@ -20,7 +38,122 @@ body {
 }
 
 .nav-bar .nav-title h3 {
+  width: 33vw;
+  text-align: center;
+  margin-bottom: 0;
+  padding-bottom: 10px;
   font-size: .8rem;
+  display: block;
+}
+
+.nav-bar .nav-title h3.active:after {
+  content: "";
+  height: 3px;
+  width: 100%;
+  background: #212943;
+  display: block;
+  position: relative;
+  bottom: -10px;
+}
+
+.timer {
+  background: #fff;
+  border: .5px solid #212943;
+  border-radius: 7px;
+  margin: 24px;
+  padding: 24px 32px;
+  font-family: sans-serif;
+  display: inline-block;
+}
+
+.timer-section {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+h4 {
+  font-family: Nunito;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.button-section {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.timer-btn {
+  width: 3rem;
+  height: 3rem;
+  color: #7c99fc;
+  cursor: pointer;
+  background: #fff;
+  border: none;
+  border-radius: 50%;
+  margin-left: .5rem;
+}
+
+.timer-btn_start {
+  color: #7cfc95;
+}
+
+.timer-btn_stop {
+  color: #fc7c7c;
+}
+
+.timer_complete_message {
+  color: #fff;
+  text-align: center;
+  z-index: 2;
+  width: 60%;
+  background: #7c99fc;
+  border-radius: .5rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1rem;
+  font-family: Nunito;
+  font-weight: 300;
+  transition: all .5s;
+  display: block;
+  transform: translate(0%, 50%);
+}
+
+.studbud-bar {
+  background: #fff;
+  border: .5px solid #212943;
+  border-radius: 7px;
+  margin: 24px;
+  padding: 24px 32px;
+  display: inline-block;
+}
+
+.studbud-bar p {
+  font-family: Nunito;
+  font-size: 2rem;
+  font-weight: 400;
+}
+
+.logo {
+  justify-content: center;
+  display: flex;
+}
+
+.logo img {
+  width: 240px;
+  height: 67px;
+  margin: 6px;
+}
+
+h3 {
+  font-family: Nunito;
+  font-weight: 400;
+}
+
+p {
+  font-family: Nunito;
+  font-weight: 200;
 }
 
 /*# sourceMappingURL=index.c74267d1.css.map */

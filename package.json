@@ -2,7 +2,7 @@
   "name": "studbud",
   "version": "1.0.0",
   "description": "Web appliction to manage study sessions for Year 9-12 students.",
-  "main": "server.js",
+
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "parcel build ./public/index.html",
@@ -19,13 +19,12 @@
   },
   "homepage": "https://github.com/anusharana/studbud#readme",
   "dependencies": {
-    "express": "^4.18.0"
+    "express": "^4.18.0",
+    "sass": "^1.51.0"
   },
   "devDependencies": {
     "@parcel/transformer-sass": "^2.5.0",
-    "autoprefixer": "^10.4.6",
-    "parcel": "^2.5.0",
-    "postcss": "^8.4.13",
-    "sass": "^1.51.0"
+    "parcel": "^2.5.0"
+
   }
 }

@@ -1,3 +1,35 @@
 body {
     background-color: #fafafa;
 }
+
+.row {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "column1 column2";
+
+}
+
+
+#column-1 {
+    grid-area: column1;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+#column-2 {
+
+    grid-area: column2;
+    max-width: 300px;
+    margin: 0 auto;
+
+}
+
+
+
+// Responsive screen sizing - when the screen is less than 600px wide, make the two columns stack on top of eachother
+@media screen and (max-width: 600px) {
+    .row {
+        flex-direction: column;
+    }
+}
