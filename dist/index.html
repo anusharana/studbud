@@ -25,7 +25,7 @@
 
 </head>
 
-<body onload="pomodoro()">
+<body>
 
   <div class="header">
 
@@ -50,7 +50,7 @@
 
 <!-- Create a flexbox for the two main columns named row  -->
 
-<div class="row">
+<div class="row-home">
 
 <!-- Split the content into two classes named column -->
 <!-- Column 1 -->
@@ -75,27 +75,43 @@
     <p>Start the timer to begin your pomodoro study session. A timer will go off at each break.</p>
     
     <!--   Element for the timer complete notification -->
-    <h4 id="timer_complete"> </h4>
+    <h4 id="timerComplete"> </h4>
       
     <div class="timer">
 
-      <div class="timer-section">
+      <div class="timerSection">
       
-        <h4 id="timer_minutes"></h4>
+        <h4 id="timerMinutes"></h4>
         <h4>:</h4>
-        <h4 id="timer_seconds"></h4>
+        <h4 id="timerSeconds"></h4>
 
       </div> 
 
-      <div class="button-section">
+      <!-- Load audio sources into the page, make invisible  -->
+      <audio style="display: none" id="startSound">
+        <source src="/start.04a3c7b6.wav"> 
+
+      </audio>
+      
+      <audio style="display: none" id="endSound">
+        <source src="/bell.f52ad1d3.wav"> 
+
+      </audio>
+
+
+      <div class="buttonSection">
       
         <!-- Control Button - Start and Pause -->
-        <button type="button" onclick="start_btn()" class="timer-btn timer-btn_control timer-btn_start">
+        <button type="button" class="timerButton" id="timerButtonStart">
           <span class="material-icons">play_arrow</span>    
         </button>
 
+        <button type="button" class="timerButton" id="timerButtonPause">
+          <span class="material-icons">pause</span>    
+        </button>
+
         <!-- Reset timer button -->
-        <button type="button" onclick="reset_btn()" class="timer-btn timer-btn_reset">
+        <button type="button" class="timerButton" id="timerButtonReset">
           <span class="material-icons">restart_alt</span>    
         </button>
       </div>
@@ -115,71 +131,88 @@
     <h3>PROGRESS BAR</h3>
     <p>Progress bar will fill as you complete your tasks in the KANBAN board below.</p>
 
+    <div class="progress-bar"></div>
+
   </div>
 
+  <div class="task-grid">
+    <form id="taskform"> 
+      <h3>CREATE A TASK</h3>
+      <label for="task">Task:</label>
+      <input type="text" name="task" id="taskInput">
+      
+      <br>
+      <!--   Date Input -->
+      <label for="dueDate"> Due Date </label>
+      <input type="date" name="dueDate" id="dueDateInput">
+        
+      <br>
+        
+      <!--     Subject Selection -->
+      <label for="Subject">Select Subject:</label>
+    
+      <select name="subjectSelect" id="subjectInput"> 
+          <option value="">Select one </option>    
+      </select>  
+
+      <button type="submit" class="addSubjectButton"> 
+        <span class="material-icons">add</span> 
+      </button>
+      
+      <br>
+  
+      <!--Priority--> 
+      <label for="Priority">Task Priority: </label>
+      <select name="priority" id="priorityInput">
+      <!--       Set a default option -->
+          <option value="">Select one</option>
+          <option value="Low"> Low </option>
+          <option value="Medium"> Medium </option>
+          <option value="High"> High </option>
+      </select>
+  
+  
+      <br>
+      <button type="submit" id="itemSubmit"> Submit </button>
+  
+    </form>
+      
+    <!--   Location to add any extra HTML to populate the content that we have just created in array 'taskList' -->
+    <!-- <ul></ul> -->
+      
+    <!-- task grid div              -->
+  </div>
 
   <div class="kanban-board">
+    <h3>KANBAN BOARD</h3>
 
-
-    <div class="task-grid">
-      <form id="taskform"> 
-      <label for="task">Task:</label>
-        <input type="text" name="task" id="taskInput">
-        
-        <!-- <br> -->
-      <!--   Date Input -->
-        <label for="dueDate"> Due Date </label>
-        <input type="date" name="dueDate" id="dueDateInput">
-          
-        <br>
-          
-      <!--     Subject Selection -->
-        <label for="Subject">Select subject:</label>
-      
-        <select name="subjectSelect" id="subjectInput"> 
-            <option value="">Select one </option>
-      
-        
-        </select>  
-        <button type="addNewSubject"> </button>
-        
-        <br>
-    
-        <!--Priority--> 
-        <label for="Priority">Task Priority: </label>
-        <select name="priority" id="priorityInput">
-      <!--       Set a default option -->
-            <option value="">Select one</option>
-            <option value="Low"> Low </option>
-            <option value="Medium"> Medium </option>
-            <option value="High"> High </option>
-        </select>
-    
-    
-        <br>
-        <button type="submit"> Submit </button>
-    
-        <div id="tasklist">
-          <p id="emptyList"> You have not added any tasks yet</p>
-          
-        </div>
-        <ul></ul>
-    
-      </form>
-        
-      <!--   Location to add any extra HTML to populate the content that we have just created in array 'taskList' -->
-      <ul id="tasklist">
-        
-      </ul>
-        
-      <!-- task grid div              -->
+    <div class="board">
+      <p id="emptyList"> You have not added any tasks yet </p>
+      <ul id="taskList"></ul>
     </div>
+
+
   <!-- kanban board div -->
   </div>
 
  </div>  
 
 </div>
+
+<div class="row-apps">
+
+  <div id="column-1">
+    <!-- Music player  -->
+
+  </div> 
+
+  <div id="column-2">
+    <!-- Dictionary  -->
+
+  </div> 
+
+</div>
+
 </body>
 
 <script src="/index.3b06b0f7.js" defer=""></script>

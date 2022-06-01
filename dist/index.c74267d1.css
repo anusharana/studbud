@@ -2,7 +2,7 @@ body {
   background-color: #fafafa;
 }
 
-.row {
+.row-home {
   grid-template: "column1 column2" 1fr
   / 1fr 1fr;
   display: grid;
@@ -56,17 +56,67 @@ body {
   bottom: -10px;
 }
 
-.timer {
+label {
+  font-family: Nunito;
+  font-size: 1rem;
+  font-weight: 300;
+}
+
+.board {
+  width: 100%;
   background: #fff;
   border: .5px solid #212943;
   border-radius: 7px;
-  margin: 24px;
   padding: 24px 32px;
-  font-family: sans-serif;
   display: inline-block;
 }
 
-.timer-section {
+span {
+  flex-direction: row;
+  justify-content: space-between;
+  display: flex;
+}
+
+#delButton {
+  color: #7c99fc;
+  cursor: pointer;
+  background: #fff;
+  border: .5px solid #212943;
+  border-radius: 7px;
+  padding: 5px;
+}
+
+#checkBox {
+  background: #fff;
+  border-width: .5px;
+  border-color: #212943;
+  border-radius: 3rem;
+}
+
+.progress-bar {
+  width: 100%;
+  height: .1vh;
+  border: .5px solid #7c99fc;
+  border-radius: 3rem;
+  flex-flow: column;
+  justify-content: center;
+  align-items: start;
+  padding: 1rem;
+  display: flex;
+  box-shadow: 0 0 2rem #abb7e9;
+}
+
+.timer {
+  width: 100%;
+  text-align: center;
+  background: #fff;
+  border: .5px solid #212943;
+  border-radius: 7px;
+  padding: 12px 24px;
+  display: inline-block;
+}
+
+.timerSection {
   justify-content: center;
   align-items: center;
   display: flex;
@@ -75,19 +125,18 @@ body {
 h4 {
   font-family: Nunito;
   font-size: 2rem;
-  font-weight: bold;
+  font-weight: 400;
 }
 
-.button-section {
+.buttonSection {
   justify-content: center;
   align-items: center;
   display: flex;
 }
 
-.timer-btn {
+.timerButton {
   width: 3rem;
   height: 3rem;
-  color: #7c99fc;
   cursor: pointer;
   background: #fff;
   border: none;
@@ -95,44 +144,55 @@ h4 {
   margin-left: .5rem;
 }
 
-.timer-btn_start {
+#timerButtonStart {
   color: #7cfc95;
 }
 
-.timer-btn_stop {
+#timerButtonReset {
+  color: #7c99fc;
+}
+
+#timerButtonStop {
   color: #fc7c7c;
 }
 
-.timer_complete_message {
+.timerCompleteMessage {
   color: #fff;
   text-align: center;
   z-index: 2;
   width: 60%;
   background: #7c99fc;
   border-radius: .5rem;
-  margin-left: auto;
-  margin-right: auto;
   padding: 1rem;
   font-family: Nunito;
+  font-size: 1rem;
   font-weight: 300;
   transition: all .5s;
   display: block;
+  position: absolute;
+  top: 20%;
+  left: 20%;
   transform: translate(0%, 50%);
 }
 
 .studbud-bar {
+  width: 100%;
   background: #fff;
   border: .5px solid #212943;
   border-radius: 7px;
-  margin: 24px;
   padding: 24px 32px;
   display: inline-block;
 }
 
 .studbud-bar p {
+  text-align: center;
   font-family: Nunito;
-  font-size: 2rem;
+  font-size: 1rem;
   font-weight: 400;
+}
+
+.studbud-bar p:nth-child(2) {
+  color: gray;
 }
 
 .logo {

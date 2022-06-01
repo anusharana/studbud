@@ -1,8 +1,10 @@
 body {
     background-color: #fafafa;
+    // margin: 1rem;
+    // padding: 2%;
 }
 
-.row {
+.row-home {
     display: grid;
     grid-template-rows: 1fr;
     grid-template-columns: 1fr 1fr;

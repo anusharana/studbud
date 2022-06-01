@@ -1,6 +1,7 @@
-import './components/tasklist';
-import './components/navigation';
+import './components/tasklist.js';
+import './components/navigation.js';
 import './components/timer.js';
+import './components/layout.js';
 
 
 // import Timer from './components/timer.js';

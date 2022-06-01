@@ -1,22 +1,27 @@
 .studbud-bar {
     background: white;
-    margin: 24px;
     padding: 24px 32px;
     border-radius: 7px;
-    // width: 100%;
+    width: 100%;
 
     border-style: solid;
     border-color: #212943; 
     border-width: 0.5px;
 
     display: inline-block;
-    
+
     p {
         font-family: 'Nunito';
         font-weight: 400; 
-        font-size: 2rem;
+        font-size: 1rem;
+        text-align: center;
     
     }
+
+    p:nth-child(2) {
+        color: grey;
+    }
+    
 
 }
 
