@@ -14,12 +14,10 @@
     // height: 0.5vh;
     // width: 35vw;
   
-    // background: #212943;    
-    // }
-  
     .nav-title {
     display: flex;
     justify-content: space-around;
+    
 
         h3 { 
             font-size: 0.8rem;
@@ -28,15 +26,27 @@
             text-align: center;
             margin-bottom: 0;
             padding-bottom: 10px;
+
+            ////////////////////////////////////////////////////////
+            // Code of the nav line went away when the cursor pointer element and 
+            // navigation.js was added
+            // wont appear eve after comenting it out - unsure what the issue is 
+            ////////////////////////////////////////////////////////
+            cursor: pointer;
+            
+
+
             //pseudo elements are fake html element we create using CSS
             //before and after - impacts the order of elements 
             //before or after the h3 element
             //& refers to the parent element  
+
+
             &.active:after{
                 //need to specify factors for pseudo elements e.g.content 
                 content: "";
                 height: 3px; 
-                //100% of the h3 element 
+                //width is 100% of the h3 element 
                 width: 100%;
                 display: block;
                 background: #212943;
@@ -49,3 +59,4 @@
 
   
 }
+

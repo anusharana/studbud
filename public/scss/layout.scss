@@ -4,34 +4,87 @@ body {
     // padding: 2%;
 }
 
+
 .row-home {
     display: grid;
     grid-template-rows: 1fr;
     grid-template-columns: 1fr 1fr;
-    grid-template-areas: "column1 column2";
+    grid-template-areas: "column1-home column2-home";
+    // HOW TO CENTRE  USING GRID? 
 
 }
 
-
-#column-1 {
-    grid-area: column1;
-    max-width: 300px;
-    margin: 0 auto;
-}
-
-#column-2 {
-
-    grid-area: column2;
-    max-width: 300px;
-    margin: 0 auto;
+.row-apps {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "column1-apps column2-apps";
 
 }
 
+#column1-home {
+    
+    display: flex;
+    flex-direction: column;
+    // justify-content: center;
+
+    grid-area: column1-home;
+    max-width: 35vw;
+    margin: 7%;
+
+}
+
+#column2-home {
+    display: flex;
+    flex-direction: column;
+    // justify-content: center;
+
+    grid-area: column2-home;
+    max-width: 35vw;
+    margin: 7%;
+
+}
+
+.row-apps {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 1fr;
+    // grid-template-areas: "column1 column2";
+    grid-template-areas: "column1-apps column2-apps";
+
+}
+
+#column1-apps {
+    display: flex;
+    flex-direction: column;
+    // justify-content: center;
+
+    grid-area: column1-apps;
+    max-width: 35vw;
+    margin: 7%;
+
+}
+
+#column2-apps {
+    display: flex;
+    flex-direction: column;
+    // justify-content: center;
+
+    grid-area: column2-apps;
+    max-width: 35vw;
+    margin: 7%;
+}
 
 
-// Responsive screen sizing - when the screen is less than 600px wide, make the two columns stack on top of eachother
+// Responsive screen sizing - when the screen is less than 600px wide, 
+// make the two columns stack on top of eachother
 @media screen and (max-width: 600px) {
-    .row {
+    .row-home {
+        display: flex;
+        flex-direction: column;
+    }
+    .row-apps {
+        display: flex;
         flex-direction: column;
     }
 }

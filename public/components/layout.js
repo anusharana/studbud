@@ -8,16 +8,3 @@
 // how to code for different states
 // how to set different time incremements 
 
-var homePage = document.querySelector("#home");
-var appsPage = document.querySelector("#apps");
-
-
-homePage.addEventListener("click",function(event){
-    appsPage.style.display = "none";
-
-});
-
-appsPage.addEventListener("click",function(event){
-    homePage.style.display = "none";
-
-});

@@ -2,6 +2,7 @@ import './components/tasklist.js';
 import './components/navigation.js';
 import './components/timer.js';
 import './components/layout.js';
+import './components/music.js';
 
 
 // import Timer from './components/timer.js';

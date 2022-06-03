@@ -529,7 +529,8 @@ function hmrAcceptRun(bundle, id) {
 var _tasklistJs = require("./components/tasklist.js");
 var _navigationJs = require("./components/navigation.js");
 var _timerJs = require("./components/timer.js");
-var _layoutJs = require("./components/layout.js"); // import Timer from './components/timer.js';
+var _layoutJs = require("./components/layout.js");
+var _musicJs = require("./components/music.js"); // import Timer from './components/timer.js';
  // // Pass in a new instance of the timer
  // new Timer (
  //     document.querySelector(".timer")
@@ -540,7 +541,7 @@ var _layoutJs = require("./components/layout.js"); // import Timer from './compo
  //     modal.classList.add('is-active');
  // })
 
-},{"./components/timer.js":"3skrK","./components/tasklist.js":"5i9SJ","./components/navigation.js":"jFVbj","./components/layout.js":"82z9T"}],"3skrK":[function(require,module,exports) {
+},{"./components/timer.js":"3skrK","./components/tasklist.js":"5i9SJ","./components/navigation.js":"jFVbj","./components/layout.js":"82z9T","./components/music.js":"2Z4jX"}],"3skrK":[function(require,module,exports) {
 // Declare variables for the timer 
 var minutes = 25;
 var seconds = "00";
@@ -751,23 +752,24 @@ var totalTasks = taskListArray.length; //Condition to check if the checkbox attr
  //if
 
 },{}],"jFVbj":[function(require,module,exports) {
-
-},{}],"82z9T":[function(require,module,exports) {
-//If timer is active link the wellness bar to give prompts at end of session 
-// As eachtask is completed, progress bar shall increase 
-// quantifiable value => each element should take a fraction of the bar 
-// logic in css? 
-// TIMER 
-// how to code for different states
-// how to set different time incremements 
-var homePage = document.querySelector("#home");
-var appsPage = document.querySelector("#apps");
-homePage.addEventListener("click", function(event) {
+// Create variables for the nav buttons 
+var homePageNavBtn = document.getElementById("homeNavBtn");
+var appsPageNavBtn = document.getElementById("appsNavBtn");
+//Create variables for the home and apps page contents 
+var appsPage = document.querySelector(".row-home");
+var appsPage = document.querySelector(".row-apps");
+//When user clicks home nav button, display only .row-home
+homePageNavBtn.addEventListener("click", function(event) {
     appsPage.style.display = "none";
 });
-appsPage.addEventListener("click", function(event) {
+//When user clicks apps nav button, display only .row-apps
+appsPageNavBtn.addEventListener("click", function(event) {
     homePage.style.display = "none";
 });
+
+},{}],"82z9T":[function(require,module,exports) {
+
+},{}],"2Z4jX":[function(require,module,exports) {
 
 },{}]},["2xDT7","2OD7o"], "2OD7o", "parcelRequire60da")
 

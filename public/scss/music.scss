@@ -1,0 +1,96 @@
+.music-container {
+    display: flex;
+    // flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+
+    background-color: white;
+    border-radius: 15px;
+    // box-shadow: 0 20px 20px 0 grey;
+    box-shadow: 0 0 2rem #abb7e9;
+
+    padding: 3vh 3vw;
+    z-index: 10;
+
+
+}
+
+#musicTitle {
+    font-family: 'Nunito';
+    font-weight: 300;
+    font-size: 1.5rem;
+}
+
+.music-info {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.musicArtContainer {
+    width: 120px;
+    height: 120px;
+    position: relative;
+    
+    #musicArt {
+        width: inherit;
+        height: inherit;
+        border-radius: 50%;
+        object-fit: cover;
+        position: absolute;
+        
+        // TRYING TO ADJUST THE POSITION HERE 
+        // transform: translate(-25%, -25%);
+        // left: 0;
+
+        //ANIMATION 
+        // Build a rotation animation when the music is playing 
+        animation: rotate 4s linear infinite;
+        //Let the default value of animaiton be pause 
+        animation-play-state: pause;
+    
+    }
+        
+
+}
+
+//if music container has a play state added to it, trigger animation 
+.music-container.play .musicArtContainer #musicArt{
+    // animation-play-state: running;
+
+}
+
+ // Add the keyframes for animaiton 'rotate'
+ // Add reference to rotation animaiton here REFERENCE HERE 
+@keyframes rotate {
+
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.musicNav {
+    display: flex;
+    flex-direction: column;
+
+    .musicNavButton {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+
+        //Styling all buttons consistently 
+        .musicActionButton {
+            background-color: white;
+            border: 0px;
+            color: grey; 
+            font-size: 4rem;
+        }
+
+    }
+
+}
+
