@@ -142,88 +142,15 @@
       this[globalName] = mainExports;
     }
   }
-})({"2xDT7":[function(require,module,exports) {
+})({"lNJce":[function(require,module,exports) {
 "use strict";
+var global = arguments[3];
 var HMR_HOST = null;
 var HMR_PORT = null;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "d6ea1d42532a7575";
 module.bundle.HMR_BUNDLE_ID = "4d0423473b06b0f7";
-function _toConsumableArray(arr) {
-    return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
-}
-function _nonIterableSpread() {
-    throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-}
-function _iterableToArray(iter) {
-    if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
-}
-function _arrayWithoutHoles(arr) {
-    if (Array.isArray(arr)) return _arrayLikeToArray(arr);
-}
-function _createForOfIteratorHelper(o, allowArrayLike) {
-    var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"];
-    if (!it) {
-        if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") {
-            if (it) o = it;
-            var i = 0;
-            var F = function F() {};
-            return {
-                s: F,
-                n: function n() {
-                    if (i >= o.length) return {
-                        done: true
-                    };
-                    return {
-                        done: false,
-                        value: o[i++]
-                    };
-                },
-                e: function e(_e) {
-                    throw _e;
-                },
-                f: F
-            };
-        }
-        throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-    }
-    var normalCompletion = true, didErr = false, err;
-    return {
-        s: function s() {
-            it = it.call(o);
-        },
-        n: function n() {
-            var step = it.next();
-            normalCompletion = step.done;
-            return step;
-        },
-        e: function e(_e2) {
-            didErr = true;
-            err = _e2;
-        },
-        f: function f() {
-            try {
-                if (!normalCompletion && it.return != null) it.return();
-            } finally{
-                if (didErr) throw err;
-            }
-        }
-    };
-}
-function _unsupportedIterableToArray(o, minLen) {
-    if (!o) return;
-    if (typeof o === "string") return _arrayLikeToArray(o, minLen);
-    var n = Object.prototype.toString.call(o).slice(8, -1);
-    if (n === "Object" && o.constructor) n = o.constructor.name;
-    if (n === "Map" || n === "Set") return Array.from(o);
-    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
-}
-function _arrayLikeToArray(arr, len) {
-    if (len == null || len > arr.length) len = arr.length;
-    for(var i = 0, arr2 = new Array(len); i < len; i++)arr2[i] = arr[i];
-    return arr2;
-}
-/* global HMR_HOST, HMR_PORT, HMR_ENV_HASH, HMR_SECURE, chrome, browser */ /*::
+/* global HMR_HOST, HMR_PORT, HMR_ENV_HASH, HMR_SECURE, chrome, browser, importScripts */ /*::
 import type {
   HMRAsset,
   HMRMessage,
@@ -262,7 +189,7 @@ declare var HMR_ENV_HASH: string;
 declare var HMR_SECURE: boolean;
 declare var chrome: ExtensionContext;
 declare var browser: ExtensionContext;
-*/ var OVERLAY_ID = '__parcel__error__overlay__';
+*/ var OVERLAY_ID = "__parcel__error__overlay__";
 var OldModule = module.bundle.Module;
 function Module(moduleName) {
     OldModule.call(this, moduleName);
@@ -270,10 +197,10 @@ function Module(moduleName) {
         data: module.bundle.hotData,
         _acceptCallbacks: [],
         _disposeCallbacks: [],
-        accept: function accept(fn) {
+        accept: function(fn) {
             this._acceptCallbacks.push(fn || function() {});
         },
-        dispose: function dispose(fn) {
+        dispose: function(fn) {
             this._disposeCallbacks.push(fn);
         }
     };
@@ -282,62 +209,58 @@ function Module(moduleName) {
 module.bundle.Module = Module;
 var checkedAssets, acceptedAssets, assetsToAccept /*: Array<[ParcelRequire, string]> */ ;
 function getHostname() {
-    return HMR_HOST || (location.protocol.indexOf('http') === 0 ? location.hostname : 'localhost');
+    return HMR_HOST || (location.protocol.indexOf("http") === 0 ? location.hostname : "localhost");
 }
 function getPort() {
     return HMR_PORT || location.port;
 } // eslint-disable-next-line no-redeclare
 var parent = module.bundle.parent;
-if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
+if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== "undefined") {
     var hostname = getHostname();
     var port = getPort();
-    var protocol = HMR_SECURE || location.protocol == 'https:' && !/localhost|127.0.0.1|0.0.0.0/.test(hostname) ? 'wss' : 'ws';
-    var ws = new WebSocket(protocol + '://' + hostname + (port ? ':' + port : '') + '/'); // $FlowFixMe
-    ws.onmessage = function(event) {
+    var protocol = HMR_SECURE || location.protocol == "https:" && !/localhost|127.0.0.1|0.0.0.0/.test(hostname) ? "wss" : "ws";
+    var ws = new WebSocket(protocol + "://" + hostname + (port ? ":" + port : "") + "/"); // Safari doesn't support sourceURL in error stacks.
+    // eval may also be disabled via CSP, so do a quick check.
+    var supportsSourceURL = false;
+    try {
+        (0, eval)('throw new Error("test"); //# sourceURL=test.js');
+    } catch (err) {
+        supportsSourceURL = err.stack.includes("test.js");
+    } // $FlowFixMe
+    ws.onmessage = async function(event) {
         checkedAssets = {} /*: {|[string]: boolean|} */ ;
         acceptedAssets = {} /*: {|[string]: boolean|} */ ;
         assetsToAccept = [];
         var data = JSON.parse(event.data);
-        if (data.type === 'update') {
+        if (data.type === "update") {
             // Remove error overlay if there is one
-            if (typeof document !== 'undefined') removeErrorOverlay();
-            var assets = data.assets.filter(function(asset) {
-                return asset.envHash === HMR_ENV_HASH;
-            }); // Handle HMR Update
-            var handled = assets.every(function(asset) {
-                return asset.type === 'css' || asset.type === 'js' && hmrAcceptCheck(module.bundle.root, asset.id, asset.depsByBundle);
+            if (typeof document !== "undefined") removeErrorOverlay();
+            let assets = data.assets.filter((asset)=>asset.envHash === HMR_ENV_HASH); // Handle HMR Update
+            let handled = assets.every((asset)=>{
+                return asset.type === "css" || asset.type === "js" && hmrAcceptCheck(module.bundle.root, asset.id, asset.depsByBundle);
             });
             if (handled) {
-                console.clear();
-                assets.forEach(function(asset) {
-                    hmrApply(module.bundle.root, asset);
-                });
+                console.clear(); // Dispatch custom event so other runtimes (e.g React Refresh) are aware.
+                if (typeof window !== "undefined" && typeof CustomEvent !== "undefined") window.dispatchEvent(new CustomEvent("parcelhmraccept"));
+                await hmrApplyUpdates(assets);
                 for(var i = 0; i < assetsToAccept.length; i++){
                     var id = assetsToAccept[i][1];
                     if (!acceptedAssets[id]) hmrAcceptRun(assetsToAccept[i][0], id);
                 }
-            } else if ('reload' in location) location.reload();
+            } else if ("reload" in location) location.reload();
             else {
                 // Web extension context
-                var ext = typeof chrome === 'undefined' ? typeof browser === 'undefined' ? null : browser : chrome;
+                var ext = typeof chrome === "undefined" ? typeof browser === "undefined" ? null : browser : chrome;
                 if (ext && ext.runtime && ext.runtime.reload) ext.runtime.reload();
             }
         }
-        if (data.type === 'error') {
+        if (data.type === "error") {
             // Log parcel errors to console
-            var _iterator = _createForOfIteratorHelper(data.diagnostics.ansi), _step;
-            try {
-                for(_iterator.s(); !(_step = _iterator.n()).done;){
-                    var ansiDiagnostic = _step.value;
-                    var stack = ansiDiagnostic.codeframe ? ansiDiagnostic.codeframe : ansiDiagnostic.stack;
-                    console.error('🚨 [parcel]: ' + ansiDiagnostic.message + '\n' + stack + '\n\n' + ansiDiagnostic.hints.join('\n'));
-                }
-            } catch (err) {
-                _iterator.e(err);
-            } finally{
-                _iterator.f();
+            for (let ansiDiagnostic of data.diagnostics.ansi){
+                let stack = ansiDiagnostic.codeframe ? ansiDiagnostic.codeframe : ansiDiagnostic.stack;
+                console.error("\uD83D\uDEA8 [parcel]: " + ansiDiagnostic.message + "\n" + stack + "\n\n" + ansiDiagnostic.hints.join("\n"));
             }
-            if (typeof document !== 'undefined') {
+            if (typeof document !== "undefined") {
                 // Render the fancy html overlay
                 removeErrorOverlay();
                 var overlay = createErrorOverlay(data.diagnostics.html); // $FlowFixMe
@@ -349,35 +272,40 @@ if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
         console.error(e.message);
     };
     ws.onclose = function() {
-        console.warn('[parcel] 🚨 Connection to the HMR server was lost');
+        console.warn("[parcel] \uD83D\uDEA8 Connection to the HMR server was lost");
     };
 }
 function removeErrorOverlay() {
     var overlay = document.getElementById(OVERLAY_ID);
     if (overlay) {
         overlay.remove();
-        console.log('[parcel] ✨ Error resolved');
+        console.log("[parcel] \u2728 Error resolved");
     }
 }
 function createErrorOverlay(diagnostics) {
-    var overlay = document.createElement('div');
+    var overlay = document.createElement("div");
     overlay.id = OVERLAY_ID;
-    var errorHTML = '<div style="background: black; opacity: 0.85; font-size: 16px; color: white; position: fixed; height: 100%; width: 100%; top: 0px; left: 0px; padding: 30px; font-family: Menlo, Consolas, monospace; z-index: 9999;">';
-    var _iterator2 = _createForOfIteratorHelper(diagnostics), _step2;
-    try {
-        for(_iterator2.s(); !(_step2 = _iterator2.n()).done;){
-            var diagnostic = _step2.value;
-            var stack = diagnostic.codeframe ? diagnostic.codeframe : diagnostic.stack;
-            errorHTML += "\n      <div>\n        <div style=\"font-size: 18px; font-weight: bold; margin-top: 20px;\">\n          \uD83D\uDEA8 ".concat(diagnostic.message, "\n        </div>\n        <pre>").concat(stack, "</pre>\n        <div>\n          ").concat(diagnostic.hints.map(function(hint) {
-                return '<div>💡 ' + hint + '</div>';
-            }).join(''), "\n        </div>\n        ").concat(diagnostic.documentation ? "<div>\uD83D\uDCDD <a style=\"color: violet\" href=\"".concat(diagnostic.documentation, "\" target=\"_blank\">Learn more</a></div>") : '', "\n      </div>\n    ");
-        }
-    } catch (err) {
-        _iterator2.e(err);
-    } finally{
-        _iterator2.f();
+    let errorHTML = '<div style="background: black; opacity: 0.85; font-size: 16px; color: white; position: fixed; height: 100%; width: 100%; top: 0px; left: 0px; padding: 30px; font-family: Menlo, Consolas, monospace; z-index: 9999;">';
+    for (let diagnostic of diagnostics){
+        let stack = diagnostic.frames.length ? diagnostic.frames.reduce((p, frame)=>{
+            return `${p}
+<a href="/__parcel_launch_editor?file=${encodeURIComponent(frame.location)}" style="text-decoration: underline; color: #888" onclick="fetch(this.href); return false">${frame.location}</a>
+${frame.code}`;
+        }, "") : diagnostic.stack;
+        errorHTML += `
+      <div>
+        <div style="font-size: 18px; font-weight: bold; margin-top: 20px;">
+          🚨 ${diagnostic.message}
+        </div>
+        <pre>${stack}</pre>
+        <div>
+          ${diagnostic.hints.map((hint)=>"<div>\uD83D\uDCA1 " + hint + "</div>").join("")}
+        </div>
+        ${diagnostic.documentation ? `<div>📝 <a style="color: violet" href="${diagnostic.documentation}" target="_blank">Learn more</a></div>` : ""}
+      </div>
+    `;
     }
-    errorHTML += '</div>';
+    errorHTML += "</div>";
     overlay.innerHTML = errorHTML;
     return overlay;
 }
@@ -402,7 +330,7 @@ function updateLink(link) {
         if (link.parentNode !== null) // $FlowFixMe
         link.parentNode.removeChild(link);
     };
-    newLink.setAttribute('href', link.getAttribute('href').split('?')[0] + '?' + Date.now()); // $FlowFixMe
+    newLink.setAttribute("href", link.getAttribute("href").split("?")[0] + "?" + Date.now()); // $FlowFixMe
     link.parentNode.insertBefore(newLink, link.nextSibling);
 }
 var cssTimeout = null;
@@ -412,33 +340,82 @@ function reloadCSS() {
         var links = document.querySelectorAll('link[rel="stylesheet"]');
         for(var i = 0; i < links.length; i++){
             // $FlowFixMe[incompatible-type]
-            var href = links[i].getAttribute('href');
+            var href = links[i].getAttribute("href");
             var hostname = getHostname();
-            var servedFromHMRServer = hostname === 'localhost' ? new RegExp('^(https?:\\/\\/(0.0.0.0|127.0.0.1)|localhost):' + getPort()).test(href) : href.indexOf(hostname + ':' + getPort());
+            var servedFromHMRServer = hostname === "localhost" ? new RegExp("^(https?:\\/\\/(0.0.0.0|127.0.0.1)|localhost):" + getPort()).test(href) : href.indexOf(hostname + ":" + getPort());
             var absolute = /^https?:\/\//i.test(href) && href.indexOf(location.origin) !== 0 && !servedFromHMRServer;
             if (!absolute) updateLink(links[i]);
         }
         cssTimeout = null;
     }, 50);
 }
+async function hmrApplyUpdates(assets) {
+    global.parcelHotUpdate = Object.create(null);
+    let scriptsToRemove;
+    try {
+        // If sourceURL comments aren't supported in eval, we need to load
+        // the update from the dev server over HTTP so that stack traces
+        // are correct in errors/logs. This is much slower than eval, so
+        // we only do it if needed (currently just Safari).
+        // https://bugs.webkit.org/show_bug.cgi?id=137297
+        // This path is also taken if a CSP disallows eval.
+        if (!supportsSourceURL) {
+            let promises = assets.map((asset)=>{
+                if (asset.type === "js") {
+                    if (typeof document !== "undefined") {
+                        let script = document.createElement("script");
+                        script.src = asset.url;
+                        return new Promise((resolve, reject)=>{
+                            var _document$head;
+                            script.onload = ()=>resolve(script);
+                            script.onerror = reject;
+                            (_document$head = document.head) === null || _document$head === void 0 || _document$head.appendChild(script);
+                        });
+                    } else if (typeof importScripts === "function") return new Promise((resolve, reject)=>{
+                        try {
+                            importScripts(asset.url);
+                        } catch (err) {
+                            reject(err);
+                        }
+                    });
+                }
+            });
+            scriptsToRemove = await Promise.all(promises);
+        }
+        assets.forEach(function(asset) {
+            hmrApply(module.bundle.root, asset);
+        });
+    } finally{
+        delete global.parcelHotUpdate;
+        if (scriptsToRemove) scriptsToRemove.forEach((script)=>{
+            if (script) {
+                var _document$head2;
+                (_document$head2 = document.head) === null || _document$head2 === void 0 || _document$head2.removeChild(script);
+            }
+        });
+    }
+}
 function hmrApply(bundle, asset) {
     var modules = bundle.modules;
     if (!modules) return;
-    if (asset.type === 'css') reloadCSS();
-    else if (asset.type === 'js') {
-        var deps = asset.depsByBundle[bundle.HMR_BUNDLE_ID];
+    if (asset.type === "css") reloadCSS();
+    else if (asset.type === "js") {
+        let deps = asset.depsByBundle[bundle.HMR_BUNDLE_ID];
         if (deps) {
             if (modules[asset.id]) {
                 // Remove dependencies that are removed and will become orphaned.
                 // This is necessary so that if the asset is added back again, the cache is gone, and we prevent a full page reload.
-                var oldDeps = modules[asset.id][1];
-                for(var dep in oldDeps)if (!deps[dep] || deps[dep] !== oldDeps[dep]) {
-                    var id = oldDeps[dep];
-                    var parents = getParents(module.bundle.root, id);
+                let oldDeps = modules[asset.id][1];
+                for(let dep in oldDeps)if (!deps[dep] || deps[dep] !== oldDeps[dep]) {
+                    let id = oldDeps[dep];
+                    let parents = getParents(module.bundle.root, id);
                     if (parents.length === 1) hmrDelete(module.bundle.root, id);
                 }
             }
-            var fn = new Function('require', 'module', 'exports', asset.output);
+            if (supportsSourceURL) // Global eval. We would use `new Function` here but browser
+            // support for source maps is better with eval.
+            (0, eval)(asset.output);
+            let fn = global.parcelHotUpdate[asset.id];
             modules[asset.id] = [
                 fn,
                 deps
@@ -447,19 +424,19 @@ function hmrApply(bundle, asset) {
     }
 }
 function hmrDelete(bundle, id1) {
-    var modules = bundle.modules;
+    let modules = bundle.modules;
     if (!modules) return;
     if (modules[id1]) {
         // Collect dependencies that will become orphaned when this module is deleted.
-        var deps = modules[id1][1];
-        var orphans = [];
-        for(var dep in deps){
-            var parents = getParents(module.bundle.root, deps[dep]);
+        let deps = modules[id1][1];
+        let orphans = [];
+        for(let dep in deps){
+            let parents = getParents(module.bundle.root, deps[dep]);
             if (parents.length === 1) orphans.push(deps[dep]);
         } // Delete the module. This must be done before deleting dependencies in case of circular dependencies.
         delete modules[id1];
         delete bundle.cache[id1]; // Now delete the orphans.
-        orphans.forEach(function(id) {
+        orphans.forEach((id)=>{
             hmrDelete(module.bundle.root, id);
         });
     } else if (bundle.parent) hmrDelete(bundle.parent, id1);
@@ -467,22 +444,22 @@ function hmrDelete(bundle, id1) {
 function hmrAcceptCheck(bundle, id, depsByBundle) {
     if (hmrAcceptCheckOne(bundle, id, depsByBundle)) return true;
      // Traverse parents breadth first. All possible ancestries must accept the HMR update, or we'll reload.
-    var parents = getParents(module.bundle.root, id);
-    var accepted = false;
+    let parents = getParents(module.bundle.root, id);
+    let accepted = false;
     while(parents.length > 0){
-        var v = parents.shift();
-        var a = hmrAcceptCheckOne(v[0], v[1], null);
+        let v = parents.shift();
+        let a = hmrAcceptCheckOne(v[0], v[1], null);
         if (a) // If this parent accepts, stop traversing upward, but still consider siblings.
         accepted = true;
         else {
             // Otherwise, queue the parents in the next level upward.
-            var p = getParents(module.bundle.root, v[1]);
+            let p = getParents(module.bundle.root, v[1]);
             if (p.length === 0) {
                 // If there are no parents, then we've reached an entry without accepting. Reload.
                 accepted = false;
                 break;
             }
-            parents.push.apply(parents, _toConsumableArray(p));
+            parents.push(...p);
         }
     }
     return accepted;
@@ -541,7 +518,147 @@ var _musicJs = require("./components/music.js"); // import Timer from './compone
  //     modal.classList.add('is-active');
  // })
 
-},{"./components/timer.js":"3skrK","./components/tasklist.js":"5i9SJ","./components/navigation.js":"jFVbj","./components/layout.js":"82z9T","./components/music.js":"2Z4jX"}],"3skrK":[function(require,module,exports) {
+},{"./components/tasklist.js":"5i9SJ","./components/navigation.js":"jFVbj","./components/timer.js":"3skrK","./components/layout.js":"82z9T","./components/music.js":"2Z4jX"}],"5i9SJ":[function(require,module,exports) {
+//////////////////////////////////////////////////////////////////////
+// *NOTE* All code that regards to div class column-2 is in tasklist.js. 
+// This inlcudes sub divs Progress Section, Task Form and Kanban Board.
+//////////////////////////////////////////////////////////////////////
+// Create const variables to get elements from HTML 
+const form = document.getElementById("taskform");
+// const button = document.querySelector("#taskform > button");
+// WHy doesnt the bellow work? 
+const subButton = document.getElementById("itemSubmit");
+// Create variabales to dynamicly store task input info
+var taskInput = document.getElementById("taskInput");
+var taskList = document.getElementById("taskList");
+var dueDateInput = document.getElementById("dueDateInput");
+// var subjectSelectInput = document.getElementById("subjectInput");
+var priorityInput = document.getElementById("priorityInput");
+var completionTimeInput = document.getElementById("completionTimeInput");
+// var estimatedTimeInput = document.getElementById("estimatedTimeInput");
+//Define a function for creating subject tags 
+// Bind an event to the submit button to capture the information from the form and 
+// store it in localStorage
+subButton.addEventListener("click", function(event) {
+    event.preventDefault();
+    //Get the value of the 
+    // let task = taskInput.value;
+    let taskDescription = taskInput.value;
+    let dueDate = dueDateInput.value;
+    // let completionTime = completionTimeInput.value; not used 
+    // let estimatedTime = estimatedTimeInput.value; ///// not used 
+    //Options is an array of the drop down options, use selectedIndex to access the user's selected option
+    // and store in variable priorityRating
+    let priorityRating = priorityInput.options[priorityInput.selectedIndex].value;
+    // let subjectSelect = subjectSelectInput.options[subjectSelectInput.selectedIndex].value;
+    //Call addTask function
+    // addTask(task, dueDate, estimatedTime, priorityRating, false);
+    addTask(taskDescription, dueDate, priorityRating, false);
+// console.log(taskList);
+});
+//Create aray to store tasks
+var taskListArray = [];
+//Define a function for dynamically creating task objects 
+function addTask(taskDescription, dueDate, priorityRating, completionStatus) {
+    //Data creation to populate object paramteres
+    let d = new Date();
+    let dateCreated = d.getFullYear();
+    //Create the task object 
+    let task = {
+        taskDescription,
+        dueDate,
+        // subject,
+        // estimatedTime, 
+        priorityRating,
+        // completionTime,
+        completionStatus
+    };
+    //Push task object to taskList array 
+    taskListArray.push(task);
+    renderTask(task);
+// return task; - remove this as now we call the renderTask function, which prints it to the screen 
+}
+function renderTask(task) {
+    //Create HTML elements 
+    //This is a list item to populate the unordered list made in HTML file 
+    //COME BACK //// Create ablock element and elements within it? 
+    var itemBlock = document.createElement("div");
+    let itemDescription = document.createElement("span");
+    itemDescription.innerHTML = "<p>" + task.taskDescription + "</p>";
+    // Task list is the array, wach element holds an object 
+    taskList.appendChild(itemDescription);
+    // itemBlock.appendChild(itemDescription);
+    ////////////////////////////////////////////////////////////////////////////////
+    //Add attributes like subject, date and priority here 
+    ////////////////////////////////////////////////////////////////////////////////
+    // Create HTML element of the task attributes 
+    var taskAttSection = document.createElement("div");
+    //Create HTML section for the buttons in the itemBlock
+    //COME BACK 
+    var taskButton = document.createElement("div");
+    //Create HTML element of Delete Button 
+    let delButton = document.createElement("button");
+    delButton.setAttribute("id", "delButton");
+    let delButtonText = document.createTextNode("X");
+    // COME BACK - CODE BREAKS WHEN BELOW CODE IS IMPLEMENTED 
+    // delButtonText.setAttribute('id', 'delButtonText');
+    //Append the text to the button element 
+    delButton.appendChild(delButtonText);
+    //for button to appear on the screen, append button to the item we created
+    //itemBlock??
+    itemDescription.appendChild(delButton);
+    //Event listeners for DOM elements 
+    delButton.addEventListener("click", function(event) {
+        event.preventDefault();
+        //itemBlock??
+        itemDescription.remove();
+    });
+    //Create HTML element of the task completion box 
+    let checkBox = document.createElement("input");
+    checkBox.setAttribute("type", "checkbox");
+    checkBox.setAttribute("id", "checkBox");
+    //append it 
+    itemDescription.appendChild(checkBox);
+    //Clear the input form once a task has been added to the kanban board 
+    form.reset();
+    //Create HTML element of Complete Button 
+    // Alter the completion status attribute of object 
+    // intertwine logic with progress bar 
+    // completionStatus = true;
+    //Condition to check whether a task has been added yet
+    /////////// come back - MAKE THIS DYNAMIC 
+    if (taskListArray.length >= 1) //Set display to none to remove prompt in task list section 
+    document.getElementById("emptyList").style.display = "none";
+    else //CODE to get he message back once removes? not dynamic COME BACK 
+    document.getElementById("emptyList").style.display = "inline-block";
+}
+//Fill the progress bar based on whether the check button has been selected
+//HOW TO STORE THE NUMBER OF TASKS & NUMBER OF BOXES CHECKED FOR PROGRESS BAR
+//
+var totalTasks = taskListArray.length; //Condition to check if the checkbox attribute is checked 
+ // How to do this for many tasks?? 
+ // select from an array 
+ // var checked = document.querySelector('tasklist > div ...);
+ // loop through the task list array - how ot make this dynamic?? 
+ //if
+
+},{}],"jFVbj":[function(require,module,exports) {
+// Create variables for the nav buttons 
+var homePageNavBtn = document.getElementById("homeNavBtn");
+var appsPageNavBtn = document.getElementById("appsNavBtn");
+//Create variables for the home and apps page contents 
+var homePage = document.querySelector(".row-home");
+var appsPage = document.querySelector(".row-apps");
+//When user clicks home nav button, display only .row-home
+homePageNavBtn.addEventListener("click", function(event) {
+    appsPage.style.display = "none";
+});
+//When user clicks apps nav button, display only .row-apps
+appsPageNavBtn.addEventListener("click", function(event) {
+    homePage.style.display = "none";
+});
+
+},{}],"3skrK":[function(require,module,exports) {
 // Declare variables for the timer 
 var minutes = 25;
 var seconds = "00";
@@ -552,8 +669,8 @@ var secondsInterval;
 // Contructor returns new HTML Audio element as instructed in paranthesis 
 // var startSound = new Audio("sound/start.wav");
 // var bellSound = new Audio("sound/bell.wav");
-var startSound = document.getElementById('startSound');
-var endSound = document.getElementById('endSound');
+var startSound = document.getElementById("startSound");
+var endSound = document.getElementById("endSound");
 //Declare variables of button elements 
 var startTimerButton = document.getElementById("timerButtonStart");
 // var pauseButton = document.getElementById("timerButtonStart");
@@ -629,148 +746,67 @@ function resetButton() {
     pomodoro();
 }
 
-},{}],"5i9SJ":[function(require,module,exports) {
-//////////////////////////////////////////////////////////////////////
-// *NOTE* All code that regards to div class column-2 is in tasklist.js. 
-// This inlcudes sub divs Progress Section, Task Form and Kanban Board.
-//////////////////////////////////////////////////////////////////////
-// Create const variables to get elements from HTML 
-const form = document.getElementById("taskform");
-// const button = document.querySelector("#taskform > button");
-// WHy doesnt the bellow work? 
-const subButton = document.getElementById("itemSubmit");
-// Create variabales to dynamicly store task input info
-var taskInput = document.getElementById("taskInput");
-var taskList = document.getElementById("taskList");
-var dueDateInput = document.getElementById("dueDateInput");
-// var subjectSelectInput = document.getElementById("subjectInput");
-var priorityInput = document.getElementById("priorityInput");
-var completionTimeInput = document.getElementById("completionTimeInput");
-// var estimatedTimeInput = document.getElementById("estimatedTimeInput");
-//Define a function for creating subject tags 
-// Bind an event to the submit button to capture the information from the form and 
-// store it in localStorage
-subButton.addEventListener("click", function(event) {
-    event.preventDefault();
-    //Get the value of the 
-    // let task = taskInput.value;
-    let taskDescription = taskInput.value;
-    let dueDate = dueDateInput.value;
-    // let completionTime = completionTimeInput.value; not used 
-    // let estimatedTime = estimatedTimeInput.value; ///// not used 
-    //Options is an array of the drop down options, use selectedIndex to access the user's selected option
-    // and store in variable priorityRating
-    let priorityRating = priorityInput.options[priorityInput.selectedIndex].value;
-    // let subjectSelect = subjectSelectInput.options[subjectSelectInput.selectedIndex].value;
-    //Call addTask function
-    // addTask(task, dueDate, estimatedTime, priorityRating, false);
-    addTask(taskDescription, dueDate, priorityRating, false);
-// console.log(taskList);
-});
-//Create aray to store tasks
-var taskListArray = [];
-//Define a function for dynamically creating task objects 
-function addTask(taskDescription, dueDate, priorityRating, completionStatus) {
-    //Data creation to populate object paramteres
-    let d = new Date();
-    let dateCreated = d.getFullYear();
-    //Create the task object 
-    let task = {
-        taskDescription,
-        dueDate,
-        // subject,
-        // estimatedTime, 
-        priorityRating,
-        // completionTime,
-        completionStatus
-    };
-    //Push task object to taskList array 
-    taskListArray.push(task);
-    renderTask(task);
-// return task; - remove this as now we call the renderTask function, which prints it to the screen 
-}
-function renderTask(task) {
-    //Create HTML elements 
-    //This is a list item to populate the unordered list made in HTML file 
-    //COME BACK //// Create ablock element and elements within it? 
-    var itemBlock = document.createElement("div");
-    let itemDescription = document.createElement("span");
-    itemDescription.innerHTML = '<p>' + task.taskDescription + '</p>';
-    // Task list is the array, wach element holds an object 
-    taskList.appendChild(itemDescription);
-    // itemBlock.appendChild(itemDescription);
-    ////////////////////////////////////////////////////////////////////////////////
-    //Add attributes like subject, date and priority here 
-    ////////////////////////////////////////////////////////////////////////////////
-    // Create HTML element of the task attributes 
-    var taskAttSection = document.createElement('div');
-    //Create HTML section for the buttons in the itemBlock
-    //COME BACK 
-    var taskButton = document.createElement('div');
-    //Create HTML element of Delete Button 
-    let delButton = document.createElement('button');
-    delButton.setAttribute('id', 'delButton');
-    let delButtonText = document.createTextNode('X');
-    // COME BACK - CODE BREAKS WHEN BELOW CODE IS IMPLEMENTED 
-    // delButtonText.setAttribute('id', 'delButtonText');
-    //Append the text to the button element 
-    delButton.appendChild(delButtonText);
-    //for button to appear on the screen, append button to the item we created
-    //itemBlock??
-    itemDescription.appendChild(delButton);
-    //Event listeners for DOM elements 
-    delButton.addEventListener('click', function(event) {
-        event.preventDefault();
-        //itemBlock??
-        itemDescription.remove();
-    });
-    //Create HTML element of the task completion box 
-    let checkBox = document.createElement('input');
-    checkBox.setAttribute('type', 'checkbox');
-    checkBox.setAttribute('id', 'checkBox');
-    //Clear the input form once a task has been added to the kanban board 
-    form.reset();
-    //Create HTML element of Complete Button 
-    // Alter the completion status attribute of object 
-    // intertwine logic with progress bar 
-    // completionStatus = true;
-    //Condition to check whether a task has been added yet
-    /////////// come back - MAKE THIS DYNAMIC 
-    if (taskListArray.length >= 1) //Set display to none to remove prompt in task list section 
-    document.getElementById("emptyList").style.display = "none";
-    else //CODE to get he message back once removes? not dynamic COME BACK 
-    document.getElementById("emptyList").style.display = "inline-block";
-}
-//Fill the progress bar based on whether the check button has been selected
-//HOW TO STORE THE NUMBER OF TASKS & NUMBER OF BOXES CHECKED FOR PROGRESS BAR
-//
-var totalTasks = taskListArray.length; //Condition to check if the checkbox attribute is checked 
- // How to do this for many tasks?? 
- // select from an array 
- // var checked = document.querySelector('tasklist > div ...);
- // loop through the task list array - how ot make this dynamic?? 
- //if
-
-},{}],"jFVbj":[function(require,module,exports) {
-// Create variables for the nav buttons 
-var homePageNavBtn = document.getElementById("homeNavBtn");
-var appsPageNavBtn = document.getElementById("appsNavBtn");
-//Create variables for the home and apps page contents 
-var appsPage = document.querySelector(".row-home");
-var appsPage = document.querySelector(".row-apps");
-//When user clicks home nav button, display only .row-home
-homePageNavBtn.addEventListener("click", function(event) {
-    appsPage.style.display = "none";
-});
-//When user clicks apps nav button, display only .row-apps
-appsPageNavBtn.addEventListener("click", function(event) {
-    homePage.style.display = "none";
-});
-
 },{}],"82z9T":[function(require,module,exports) {
 
 },{}],"2Z4jX":[function(require,module,exports) {
+var _mp3 = require("url:./public/music/*.mp3");
+var _jpeg = require("url:./public/music/images/*.jpeg");
+console.log(_mp3);
+console.log(_jpeg);
+//Create objects 
+Object.values(_jpeg).forEach((thumbnail)=>{
+    console.log(thumbnail);
+});
+//Define constants and variables to start manipulating DOM of music player
+const musicContainer = document.querySelector(".music-container");
+const playBtn = document.querySelector("#playButton");
+const prevBtn = document.querySelector("#prevButton");
+const nextBtn = document.querySelector("#nextButton");
+const musicAudio = document.querySelector("#musicAudio");
+const progressContainer = document.querySelector(".musicProgressContainer");
+const musicTitle = document.querySelector("#musicTitle");
+const musicArt = document.querySelector("#musicArt");
+//Store the titles of ths songs in an array that match the audio file names
+const musicArray = [
+    "Boom",
+    "France",
+    "JackJ",
+    "Rudie"
+];
+//Index varible to help keep track of songs
+let musicIndex = 3;
+// Initially load the music info DOM by calling function
+loadMusic(musicArray[musicIndex]);
+// Function to update the song details of title, audio source and cover art 
+function loadMusic(music) {
+    musicTitle.innerText = music;
+    //Using the ${} template placeholder literals, access the audio file and cover art files 
+    // Use URL dependencies instead 
+    musicAudio.src = "music/${music}.mp3";
+    musicArt.src = "music/images/${music}.jpeg";
+}
+//Function to play music
+function playMusic() {
+    musicContainer.classList.add("play");
+}
+//Function to pause music
+function pauseMusic() {}
+//Bind event listener to play button of music player 
+playBtn.addEventListener("click", function(event) {
+    //Check if music is currently playing 
+    const isPlaying = musicContainer.classList.contains("play");
+    //If the above condition returns true in variable isPlaying, pause the music 
+    // by calling pauseMusic() function  
+    if (isPlaying == true) pauseMusic();
+    else playMusic();
+});
 
-},{}]},["2xDT7","2OD7o"], "2OD7o", "parcelRequire60da")
+},{"url:./public/music/*.mp3":"lR8in","url:./public/music/images/*.jpeg":"iWUpZ"}],"lR8in":[function(require,module,exports) {
+module.exports = {};
+
+},{}],"iWUpZ":[function(require,module,exports) {
+module.exports = {};
+
+},{}]},["lNJce","2OD7o"], "2OD7o", "parcelRequire60da")
 
 //# sourceMappingURL=index.3b06b0f7.js.map

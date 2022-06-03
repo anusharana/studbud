@@ -3,7 +3,7 @@ var homePageNavBtn = document.getElementById("homeNavBtn");
 var appsPageNavBtn = document.getElementById("appsNavBtn");
 
 //Create variables for the home and apps page contents 
-var appsPage = document.querySelector(".row-home");
+var homePage = document.querySelector(".row-home");
 var appsPage = document.querySelector(".row-apps");
 
 //When user clicks home nav button, display only .row-home

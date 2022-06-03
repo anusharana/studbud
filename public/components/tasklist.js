@@ -129,6 +129,8 @@ function renderTask(task) {
   let checkBox = document.createElement('input');
   checkBox.setAttribute('type', 'checkbox');
   checkBox.setAttribute('id', 'checkBox');
+  //append it 
+  itemDescription.appendChild(checkBox);
 
 
 

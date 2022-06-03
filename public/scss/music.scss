@@ -2,7 +2,7 @@
     display: flex;
     // flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
     position: absolute;
 
     background-color: white;
@@ -13,6 +13,8 @@
     padding: 3vh 3vw;
     z-index: 10;
 
+    width: 33vw;
+
 
 }
 
@@ -20,11 +22,13 @@
     font-family: 'Nunito';
     font-weight: 300;
     font-size: 1.5rem;
+    position: relative;
 }
 
 .music-info {
     display: flex;
     flex-direction: column;
+    position: relative;
 
 }
 
@@ -46,7 +50,7 @@
 
         //ANIMATION 
         // Build a rotation animation when the music is playing 
-        animation: rotate 4s linear infinite;
+        animation: rotate 5s linear infinite;
         //Let the default value of animaiton be pause 
         animation-play-state: pause;
     
@@ -76,19 +80,53 @@
 .musicNav {
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
+    position: relative;
 
+
+    //Styling for the progress bar 
+    .musicProgressContainer {
+        background-color: grey;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 2vh 0;
+        height: 4px;
+        width: 100%; 
+
+        .musicProgress {
+        background-color: 7C99FC;
+        border-radius: 5px;
+        cursor: pointer;
+        //height to take 100% of its container, i.e. 4px
+        height: 100%;
+        width: 0%;
+        transition: width 0.1s linear;
+        
+        }
+
+    }
+
+    //Styling for the control buttons 
     .musicNavButton {
         display: flex;
         flex-direction: row;
         justify-content: space-evenly;
+        align-items: center;
 
         //Styling all buttons consistently 
         .musicActionButton {
             background-color: white;
-            border: 0px;
+            border: 0;
             color: grey; 
             font-size: 4rem;
+            cursor: pointer;
         }
+        
+        .actionButtonBig {
+            color: #7C99FC;
+            font-size: 4rem;
+        }
+
 
     }
 

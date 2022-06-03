@@ -220,16 +220,18 @@
     <h3>MUSIC PLAYER</h3>
 
     <!-- Div for the entire music container -->
-    <div class="music-container play">
+    <!-- Play class to signify the music is playing -->
+    <div class="music-container">
 
       <div class="music-info">
         <!-- Music Title -->
-        <h4 id = "musicTitle">Jack J</h4>
+        <h4 id = "musicTitle"></h4>
 
         <!-- Music Artwork container  -->
       <div class="musicArtContainer">
         <!-- Include alt text for users with screen readers  -->
-        <img src="music/images/JackJ.jpeg" alt="Music Cover Art" id="musicArt">
+        <!-- <img src="music/images/JackJ.jpeg" alt="Music Cover Art" id="musicArt"> -->
+        <img alt="Music Cover Art" id="musicArt">
       </div>
 
     </div>
@@ -253,12 +255,12 @@
           </button>
 
           <!-- Pause and Play Button  -->
-          <button id="prevButton" class="musicActionButton actionButtonBig">
+          <button id="playButton" class="musicActionButton actionButtonBig">
             <span class="material-symbols-outlined">play_arrow </span>
           </button>
 
           <!-- Next song button -->
-          <button id="forwardButton" class="musicActionButton">
+          <button id="nextButton" class="musicActionButton">
             <span class="material-symbols-outlined">fast_forward </span>
           </button>
       </div>
