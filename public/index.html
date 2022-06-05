@@ -33,7 +33,7 @@
   <div class="header">
 
     <!-- Logo -->
-    <a class="logo">
+    <a href="index.html" class="logo">
       <img src="images/Studbud_Logo.png" alt="StudBud Logo">
     </a>
   </div>
@@ -41,10 +41,11 @@
   <nav class = "nav-bar">  
 
     <div class = "nav-title"> 
-      <!-- Active class to determine where the toggle bar will be  -->
-      <!-- <h3 class = "active">HOME</h3> -->
-      <h3 id = "homeNavBtn">HOME</h3>
-      <h3 id = "appsNavBtn">APPS</h3>
+      <!-- Tags to the html pages as a tags are more semantically correct than h tags  -->
+
+      <a href="index.html" id = "homeNavBtn">HOME</a>
+
+      <a href="apps.html" id = "appsNavBtn">APPS</a>
     </div> 
 
     <!-- <div id = "nav-toggle"> </div> -->
@@ -63,12 +64,9 @@
   <div class="studbud-section">
 
     <h3>YOUR STUDBUD</h3>
-    <p>Set your intention to stay focussed during your study session. Do the prompts at the end for extra revision! </p>
+    <p>Set your intention to stay focussed during your study session. Remember to do a quick revision when you end your 2 hour session! </p>
     <div class = "studbud-bar">
       <p>What is your intention for todays study session?</p>
-      <p>CLICK TO TYPE</p>
-
-      <!-- COME BACK - Create a form??  -->
 
     </div>
   </div> 
@@ -81,18 +79,21 @@
     
     <!--   Element for the timer complete notification -->
     <h4 id = "timerComplete"> </h4>
+    
+    
       
     <div class = "timer">
 
       <div class = "timerSection">
       
+        <!-- Set up the structure for the countdown digits, to be updated with javascipt. Go to timer.js -->
         <h4 id = "timerMinutes"></h4>
         <h4>:</h4>
         <h4 id = "timerSeconds"></h4>
 
       </div> 
 
-      <!-- Load audio sources into the page, make invisible  -->
+      <!-- Load audio sources into the page, make invisible with display:none styling  -->
       <audio style = "display: none" id = "startSound">
         <source src = "sound/start.wav"> 
 
@@ -111,9 +112,6 @@
           <span class="material-icons">play_arrow</span>    
         </button>
 
-        <button type = "button" class= "timerButton" id = "timerButtonPause">
-          <span class="material-icons">pause</span>    
-        </button>
 
         <!-- Reset timer button -->
         <button type = "button" class= "timerButton" id = "timerButtonReset">
@@ -136,7 +134,9 @@
     <h3>PROGRESS BAR</h3>
     <p>Progress bar will fill as you complete your tasks in the KANBAN board below.</p>
 
-    <div class="progress-bar"></div>
+    <div class="progress-bar">
+      <div class="progressBarMeasure"></div>
+    </div>
 
   </div>
 
@@ -153,18 +153,6 @@
         
       <br>
         
-      <!--     Subject Selection -->
-      <label for = "Subject">Select Subject:</label>
-    
-      <select name = "subjectSelect" id = "subjectInput"> 
-          <option value = "">Select one </option>    
-      </select>  
-
-      <button type = "submit" class = "addSubjectButton"> 
-        <span class="material-icons">add</span> 
-      </button>
-      
-      <br>
   
       <!--Priority--> 
       <label for = "Priority">Task Priority: </label>
@@ -181,11 +169,7 @@
       <button type = "submit" id = "itemSubmit"> Submit </button>
   
     </form>
-      
-    <!--   Location to add any extra HTML to populate the content that we have just created in array 'taskList' -->
-    <!-- <ul></ul> -->
-      
-    <!-- task grid div              -->
+
   </div>
 
   <div class="kanban-board">
@@ -213,6 +197,10 @@
 
 </div>
 
+<!-- NOTE TO MARKER       NOTE TO MARKER       NOTE TO MARKER      NOTE TO MARKER -->
+<!-- This section is left in the index.html page to voew the functionality. There are bugs in its view in apps.html
+Feedback on how to fix this for future reference would be appreciated.  -->
+
 <div class="row-apps">
 
   <div id = "#column1-apps">
@@ -230,7 +218,9 @@
         <!-- Music Artwork container  -->
       <div class="musicArtContainer">
         <!-- Include alt text for users with screen readers  -->
-        <!-- <img src="music/images/JackJ.jpeg" alt="Music Cover Art" id="musicArt"> -->
+        <!-- NOTE TO MARKERS       NOTE TO MARKERS      NOTE TO MARKERS  
+        How to make alt text alternate depending on the album art that is being displayed?
+        Feedback here would be appreciated -->
         <img alt="Music Cover Art" id="musicArt">
       </div>
 
@@ -256,7 +246,7 @@
 
           <!-- Pause and Play Button  -->
           <button id="playButton" class="musicActionButton actionButtonBig">
-            <span class="material-symbols-outlined">play_arrow </span>
+            <span class="material-symbols-outlined play_arrow">play_arrow </span>
           </button>
 
           <!-- Next song button -->
@@ -273,7 +263,6 @@
   </div> 
 
   <div id = "#column2-apps">
-    <!-- Dictionary  -->
 
   </div> 
 

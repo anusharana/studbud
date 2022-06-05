@@ -7,53 +7,30 @@
     background: #212943;    
     }
   
-    // #nav-toggle {
-    // display: flex;
-    // justify-content: center;
-    // // HELP
-    // height: 0.5vh;
-    // width: 35vw;
   
     .nav-title {
     display: flex;
     justify-content: space-around;
     
 
-        h3 { 
-            font-size: 0.8rem;
+        a { 
+            font-style: 'Nunito';
+            color: inherit;
+            text-decoration: none;
+            font-size: 1rem;
+            
             display: block;
             width: 33vw;
             text-align: center;
             margin-bottom: 0;
-            padding-bottom: 10px;
-
-            ////////////////////////////////////////////////////////
-            // Code of the nav line went away when the cursor pointer element and 
-            // navigation.js was added
-            // wont appear eve after comenting it out - unsure what the issue is 
-            ////////////////////////////////////////////////////////
+            padding-top: 3vh;
+            padding-bottom: 5vh;
             cursor: pointer;
             
 
 
-            //pseudo elements are fake html element we create using CSS
-            //before and after - impacts the order of elements 
-            //before or after the h3 element
-            //& refers to the parent element  
 
-
-            &.active:after{
-                //need to specify factors for pseudo elements e.g.content 
-                content: "";
-                height: 3px; 
-                //width is 100% of the h3 element 
-                width: 100%;
-                display: block;
-                background: #212943;
-                bottom: -10px;
-                position: relative;
-
-            }
+           
         }
     }
 

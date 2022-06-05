@@ -4,8 +4,6 @@
 
     display: inline-block;
     width: 100%;
-    /*   display: flex;
-    flex-direction: row; */
     padding: 3vh 3vw;
     // padding: 1rem 2rem;
     border-radius: 7px;
@@ -92,5 +90,26 @@ h4 {
     // Animations for the timer 
     transform: translate(0%,50%);
     transition: 0.5s ease;
-  
+    cursor: pointer;
+
 }
+
+
+// Abimation fill mode attribute used from source below
+// SRC: https://www.w3schools.com/cssref/css3_pr_animation-fill-mode.asp
+.timerCompleteDissolve {
+    animation: fadeOutAnimation ease 2s;
+    animation-iteration-count: 1;
+    // animation-fill-mode: backwards;
+
+    @keyframes fadeOutAnimation {
+        0% {
+            opacity: 01;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+
+}
+

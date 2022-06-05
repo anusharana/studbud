@@ -32,6 +32,7 @@
 
 }
 
+//Styling for the default state of the cover art of the music playing 
 .musicArtContainer {
     width: 120px;
     height: 120px;
@@ -52,18 +53,23 @@
         // Build a rotation animation when the music is playing 
         animation: rotate 5s linear infinite;
         //Let the default value of animaiton be pause 
-        animation-play-state: pause;
-    
-    }
-        
+        animation-play-state: paused;
 
+    
+    }   
+
+}
+
+//Trigger animation of the cover art is play class is activated 
+.musicContainer .play .musicArtContainer #musicArt {
+    animation-play-state: running;
 }
 
 //if music container has a play state added to it, trigger animation 
-.music-container.play .musicArtContainer #musicArt{
-    // animation-play-state: running;
+// .music-container.play .musicArtContainer #musicArt{
+//     // animation-play-state: running;
 
-}
+// }
 
  // Add the keyframes for animaiton 'rotate'
  // Add reference to rotation animaiton here REFERENCE HERE 

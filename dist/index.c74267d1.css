@@ -70,24 +70,18 @@ body {
   display: flex;
 }
 
-.nav-bar .nav-title h3 {
+.nav-bar .nav-title a {
+  font-style: "Nunito";
+  color: inherit;
   width: 33vw;
   text-align: center;
   cursor: pointer;
   margin-bottom: 0;
-  padding-bottom: 10px;
-  font-size: .8rem;
+  padding-top: 3vh;
+  padding-bottom: 5vh;
+  font-size: 1rem;
+  text-decoration: none;
   display: block;
-}
-
-.nav-bar .nav-title h3.active:after {
-  content: "";
-  height: 3px;
-  width: 100%;
-  background: #212943;
-  display: block;
-  position: relative;
-  bottom: -10px;
 }
 
 label {
@@ -97,18 +91,49 @@ label {
 }
 
 .board {
-  width: 100%;
+  padding: 1vh vw;
+  width: 120%;
   background: #fff;
   border: .5px solid #212943;
   border-radius: 7px;
-  padding: 3vh 3vw;
   display: inline-block;
 }
 
-span {
-  flex-direction: row;
-  justify-content: space-between;
+#taskList {
+  flex-direction: column;
+  padding: 0;
+  list-style-type: none;
   display: flex;
+}
+
+.taskItem {
+  border: .5px solid #212943;
+  border-radius: 7px;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 1vh;
+  display: flex;
+}
+
+.taskItem .priorityAttLow {
+  color: #f2665c;
+}
+
+.taskItem .priorityAttMed {
+  color: #f2bb5c;
+}
+
+.taskItem .priorityAttHigh {
+  color: #f2e05c;
+}
+
+.draggable {
+  cursor: move;
+}
+
+.taskTitle {
+  font-weight: 400;
 }
 
 #delButton {
@@ -121,6 +146,8 @@ span {
 }
 
 #checkBox {
+  width: 3vh;
+  height: 3vh;
   background: #fff;
   border-width: .5px;
   border-color: #212943;
@@ -138,6 +165,41 @@ span {
   padding: 1rem;
   display: flex;
   box-shadow: 0 0 2rem #abb7e9;
+}
+
+.progress-bar .progressBarMeasure {
+  height: .1vh;
+  color: #7c99fc;
+  border-width: .5px;
+  border-radius: 3rem;
+  justify-content: center;
+  align-items: start;
+  padding: 1rem;
+  display: flex;
+}
+
+#emptyList {
+  text-align: center;
+}
+
+.draggable .draggingCurrent {
+  opacity: .5;
+  color: #7c99fc;
+}
+
+#itemSubmit {
+  color: 7C99FC;
+  letter-spacing: 1px;
+  background: #fff;
+  border-width: 2px;
+  border-color: #7c99fc;
+  border-radius: 8px;
+  justify-content: center;
+  font-family: Nunito;
+  font-size: 1rem;
+  font-weight: 300;
+  transition: all .5s;
+  display: flex;
 }
 
 .timer {
@@ -195,6 +257,7 @@ h4 {
   text-align: center;
   z-index: 2;
   width: 60%;
+  cursor: pointer;
   background: #7c99fc;
   border-radius: .5rem;
   padding: 1rem;
@@ -207,6 +270,20 @@ h4 {
   top: 20%;
   left: 20%;
   transform: translate(0%, 50%);
+}
+
+.timerCompleteDissolve {
+  animation: fadeOutAnimation 2s;
+}
+
+@keyframes fadeOutAnimation {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
 }
 
 .studbud-bar {
@@ -265,10 +342,13 @@ h4 {
   width: inherit;
   height: inherit;
   object-fit: cover;
-  animation: rotate 5s linear infinite;
-  animation-play-state: pause;
   border-radius: 50%;
+  animation: rotate 5s linear infinite paused;
   position: absolute;
+}
+
+.musicContainer .play .musicArtContainer #musicArt {
+  animation-play-state: running;
 }
 
 @keyframes rotate {

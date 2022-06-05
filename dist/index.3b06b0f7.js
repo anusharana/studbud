@@ -525,8 +525,6 @@ var _musicJs = require("./components/music.js"); // import Timer from './compone
 //////////////////////////////////////////////////////////////////////
 // Create const variables to get elements from HTML 
 const form = document.getElementById("taskform");
-// const button = document.querySelector("#taskform > button");
-// WHy doesnt the bellow work? 
 const subButton = document.getElementById("itemSubmit");
 // Create variabales to dynamicly store task input info
 var taskInput = document.getElementById("taskInput");
@@ -541,20 +539,15 @@ var completionTimeInput = document.getElementById("completionTimeInput");
 // store it in localStorage
 subButton.addEventListener("click", function(event) {
     event.preventDefault();
-    //Get the value of the 
-    // let task = taskInput.value;
+    //Get the value of the task description from object 
     let taskDescription = taskInput.value;
     let dueDate = dueDateInput.value;
-    // let completionTime = completionTimeInput.value; not used 
-    // let estimatedTime = estimatedTimeInput.value; ///// not used 
     //Options is an array of the drop down options, use selectedIndex to access the user's selected option
     // and store in variable priorityRating
-    let priorityRating = priorityInput.options[priorityInput.selectedIndex].value;
-    // let subjectSelect = subjectSelectInput.options[subjectSelectInput.selectedIndex].value;
+    var priorityRating = priorityInput.options[priorityInput.selectedIndex].value;
     //Call addTask function
-    // addTask(task, dueDate, estimatedTime, priorityRating, false);
     addTask(taskDescription, dueDate, priorityRating, false);
-// console.log(taskList);
+    console.log(taskList);
 });
 //Create aray to store tasks
 var taskListArray = [];
@@ -579,38 +572,44 @@ function addTask(taskDescription, dueDate, priorityRating, completionStatus) {
 // return task; - remove this as now we call the renderTask function, which prints it to the screen 
 }
 function renderTask(task) {
-    //Create HTML elements 
-    //This is a list item to populate the unordered list made in HTML file 
-    //COME BACK //// Create ablock element and elements within it? 
-    var itemBlock = document.createElement("div");
+    //Create HTML elements for task and task attributes 
+    // var itemBlock = document.createElement("div");
     let itemDescription = document.createElement("span");
+    itemDescription.setAttribute("class", "taskItem");
+    //Use javascript attribute dragable to allow for draggable funcitonality withit kanban board 
+    itemDescription.setAttribute("draggable", "true");
     itemDescription.innerHTML = "<p>" + task.taskDescription + "</p>";
+    ////////////////////////////////////////////////////////////////////////////////
+    // Code not working here - would appreciate feedback 
+    ////////////////////////////////////////////////////////////////////////////////
+    //Select the first direct decendent <p> tag of <span> tag in.taskItem 
+    // let descriptionStyle = document.querySelector('span + p');
+    // descriptionStyle.setAttribute('class','taskTitle');
     // Task list is the array, wach element holds an object 
     taskList.appendChild(itemDescription);
-    // itemBlock.appendChild(itemDescription);
-    ////////////////////////////////////////////////////////////////////////////////
-    //Add attributes like subject, date and priority here 
-    ////////////////////////////////////////////////////////////////////////////////
-    // Create HTML element of the task attributes 
-    var taskAttSection = document.createElement("div");
-    //Create HTML section for the buttons in the itemBlock
-    //COME BACK 
-    var taskButton = document.createElement("div");
+    // Priotity rating 
+    let priorityScale = document.createElement("p");
+    priorityScale.setAttribute("class", "priorityAtt");
+    priorityScale.innerHTML = "<p>" + task.priorityRating + "</p>";
+    itemDescription.appendChild(priorityScale);
+    //Call function to style priority
+    // priorityStyling();
+    // Due Date 
+    let dueDateAtt = document.createElement("p");
+    dueDateAtt.setAttribute("class", "dueDateAtt");
+    dueDateAtt.innerHTML = "<p>" + task.dueDate + "</p>";
+    itemDescription.appendChild(dueDateAtt);
     //Create HTML element of Delete Button 
     let delButton = document.createElement("button");
     delButton.setAttribute("id", "delButton");
     let delButtonText = document.createTextNode("X");
-    // COME BACK - CODE BREAKS WHEN BELOW CODE IS IMPLEMENTED 
-    // delButtonText.setAttribute('id', 'delButtonText');
     //Append the text to the button element 
     delButton.appendChild(delButtonText);
-    //for button to appear on the screen, append button to the item we created
-    //itemBlock??
     itemDescription.appendChild(delButton);
+    // taskList.appendChild(delButton);
     //Event listeners for DOM elements 
     delButton.addEventListener("click", function(event) {
         event.preventDefault();
-        //itemBlock??
         itemDescription.remove();
     });
     //Create HTML element of the task completion box 
@@ -621,26 +620,92 @@ function renderTask(task) {
     itemDescription.appendChild(checkBox);
     //Clear the input form once a task has been added to the kanban board 
     form.reset();
-    //Create HTML element of Complete Button 
-    // Alter the completion status attribute of object 
-    // intertwine logic with progress bar 
-    // completionStatus = true;
-    //Condition to check whether a task has been added yet
-    /////////// come back - MAKE THIS DYNAMIC 
+    //Condition to show prompt for users by checking whether a task has been added yet
     if (taskListArray.length >= 1) //Set display to none to remove prompt in task list section 
     document.getElementById("emptyList").style.display = "none";
     else //CODE to get he message back once removes? not dynamic COME BACK 
     document.getElementById("emptyList").style.display = "inline-block";
 }
-//Fill the progress bar based on whether the check button has been selected
-//HOW TO STORE THE NUMBER OF TASKS & NUMBER OF BOXES CHECKED FOR PROGRESS BAR
-//
-var totalTasks = taskListArray.length; //Condition to check if the checkbox attribute is checked 
- // How to do this for many tasks?? 
- // select from an array 
- // var checked = document.querySelector('tasklist > div ...);
- // loop through the task list array - how ot make this dynamic?? 
- //if
+//////////////////////////////////////////////////////
+// Code is doesn't work - feedback would be appreciated 
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+//Progress Bar Calculations 
+//////////////////////////////////////////////////////
+// Code is faulty, please give feedback on how to code this 
+let totalTasks = taskListArray.length;
+var percentageTaskComplete = 0;
+let markedTaskCount = 0;
+function checkMarkedTasks() {
+    //For loop to go through all tasks 
+    for(i = 0; i < taskListArray.length + 1; i++)// If checkbox is marked, change completionStatus to true 
+    if (task.completionStatus == true) //Add styling here 
+    markedTaskCount++;
+}
+function calculateProgressBar() {
+    //If task array length is 0, return 0 percent complete
+    if (totalTasks == 0) percentageTaskComplete = 0;
+    else {
+        percentageTaskComplete = markedTaskCount / totalTasks * 100;
+        // Alter the styles of the width of progress bar 
+        document.querySelector(".progressBarMeasure").style.width = "percentageTaskComplete";
+    }
+}
+//////////////////////////////////////////////////////
+// Code here doesn't work - feedback would be appreciated 
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+//Drag and drop functionality for kanban board 
+//////////////////////////////////////////////////////
+// Code for the drag and drop funcitonality for the taskItem components 
+// SRC: https://www.geeksforgeeks.org/html-draggable-attribute/
+var draggableItem = document.querySelectorAll(".draggable");
+// Select the element where the draggabe item can be stored
+var kanbanBoard = document.querySelector(".board"); // Event listener for all draggable elements 
+ // Using arrow function for event listener call back method
+ // SRC: https://developpaper.com/how-to-use-the-arrow-function-as-a-callback-to-the-event-listener/
+ // draggableItem.forEach(draggableItem => {
+ //   // When the draggable element is picked up by cursor, add class for styling 
+ //   draggable.addEventListener('dragStart', () => {
+ //     draggable.classList.add('draggingCurrent');
+ //   });
+ //   //When draggable element is dropped, remove the pick u styling 
+ //   draggable.addEventListener('dragEnd', () => {
+ //     draggable.classList.remove('draggingCurrent');
+ //   });
+ // ////////////////////////////////////////////////////////////////////////////////
+ // // Create a funciton to allow the task item to be shifted in the order of the <ul> 
+ // // SRC: https://betterprogramming.pub/create-a-sortable-list-with-draggable-items-using-javascript-9ef38f96b258
+ // // Call this below function in renderTasks() ?
+ // // COME BACK HERE - UNFINISHED CODE 
+ // ////////////////////////////////////////////////////////////////////////////////
+ // });
+ //////////////////////////////////////////////////////
+ // Code here doesn't work - feedback would be appreciated 
+ ///////////////////////////////////////////////////////
+ //Function which determines the styling of the priority rating
+ // function priorityStyling() {
+ //   //Switch statement to determine which stylings to add 
+ //   var priorityStylingClass;
+ //   switch (priorityStylingClass) {
+ //     //Cases are the potential variable held by priorityRating
+ //     case "Low" :
+ //       //Add styling of priority rating to PR element 
+ //       // priorityScale.classList.add('priorityAttLow');
+ //       priorityStylingClass = priorityAttLow;
+ //       break;
+ //     case "Medium" :
+ //       // priorityScale.classList.add('priorityAttMed');
+ //       priorityStylingClass = priorityAttMed;
+ //       break;
+ //     case "High" :
+ //       // priorityScale.classList.add('priorityAttHigh');
+ //       priorityStylingClass = priorityAttHigh;
+ //       break;
+ //   }
+ //   //Add the styling class based on what the variable priorityStylingClass has stored 
+ //   priorityScale.classList.add('priorityStylingClass');
+ // }
 
 },{}],"jFVbj":[function(require,module,exports) {
 // Create variables for the nav buttons 
@@ -651,11 +716,17 @@ var homePage = document.querySelector(".row-home");
 var appsPage = document.querySelector(".row-apps");
 //When user clicks home nav button, display only .row-home
 homePageNavBtn.addEventListener("click", function(event) {
-    appsPage.style.display = "none";
+    // appsPage.style.display = "none";
+    appsPage.style.visibility = "hidden";
+    homePage.style.visibility = "visible";
+// appsPage.classList.toggle('row-home');
 });
 //When user clicks apps nav button, display only .row-apps
 appsPageNavBtn.addEventListener("click", function(event) {
-    homePage.style.display = "none";
+    // homePage.style.display = "none";
+    appsPage.style.visibility = "visible";
+    homePage.style.visibility = "hidden";
+// homePage.classList.toggle('row-apps');
 });
 
 },{}],"3skrK":[function(require,module,exports) {
@@ -665,16 +736,15 @@ var seconds = "00";
 //Global scope of variables so it can be used dynamically in other funcitons 
 var minutesInterval;
 var secondsInterval;
+var sessionCount = 0;
 // Sounds for the start and end of pomodoro session 
-// Contructor returns new HTML Audio element as instructed in paranthesis 
-// var startSound = new Audio("sound/start.wav");
-// var bellSound = new Audio("sound/bell.wav");
 var startSound = document.getElementById("startSound");
 var endSound = document.getElementById("endSound");
 //Declare variables of button elements 
 var startTimerButton = document.getElementById("timerButtonStart");
-// var pauseButton = document.getElementById("timerButtonStart");
 var resetTimerButton = document.getElementById("timerButtonReset");
+//Timer complete DOM element
+let timerComplete = document.getElementById("timerComplete");
 // "DOMContentLoaded" attribute to make sure the event is sent once 
 // the HTML document has finished loading. Global scope. 
 document.addEventListener("DOMContentLoaded", pomodoro());
@@ -687,11 +757,6 @@ startTimerButton.addEventListener("click", startButton);
 function startButton() {
     //User clicks play button, sound occurs 
     startSound.play();
-    //HELP HERE Update the play icon to the pause icon 
-    // cant use classList as I have used ID's to signify the different types of buttons 
-    // also, if i were to change them to classes, how can i style the below icon? 
-    //   document.querySelector(".timerButton .timerButtonStart").classList.remove("timerButtonStart");
-    //   document.querySelector(".timerButton").innerHTML = `<span class="material-icons">pause</span> `;
     //Declare new variables for timer 
     // As the setInterval function waits 60000 ms to call minutesTimer, we must update the variable so it displays correct countdown time  
     var minutes1 = 24;
@@ -700,6 +765,7 @@ function startButton() {
     document.getElementById("timerMinutes").innerHTML = minutes1;
     document.getElementById("timerSeconds").innerHTML = seconds1;
     //Call setInterval function to call respective functions (minutes or seconds) to update the clock at correct times 
+    // SRC: https://theprogrammingexpert.com/javascript-countdown-timer/
     minutesInterval = setInterval(minutesTimer, 60000);
     secondsInterval = setInterval(secondsTimer, 1000);
     function minutesTimer() {
@@ -709,32 +775,30 @@ function startButton() {
     function secondsTimer() {
         seconds1 = seconds1 - 1;
         document.getElementById("timerSeconds").innerHTML = seconds1;
-        // COME BACK - FIX NUMBERS WHEN NOT TESTING 
         //Condition to ensure seconds doesn't go into negatives, clocks back to 60 once 0 has been reached. 
-        if (seconds1 <= 50) {
+        if (seconds1 <= 00) {
             //Once the 25 min session is over, clear the interval and show a message to take a break 
-            if (minutes1 <= 24) {
+            if (minutes1 <= 00) {
                 clearInterval(minutesInterval);
                 clearInterval(secondsInterval);
                 //Play bell when each session has been completed 
                 endSound.play();
-                //HOW TO COUNT THE OCCURANCE OF THIS
-                //COME BACK - concatenate the string with logic
-                // if loop? while?  " X more sessions to go" 
-                // Dynamically show a message once 25 min session is complete 
-                document.getElementById("timerComplete").innerHTML = "Session complete! Enjoy your 5 min break :)";
+                //Incremement sessionCount
+                sessionCount++;
+                //if condition to ensure the sessionCount is no more than 4 to indicate a 
+                //2 hour study session 
+                if (sessionCount == 4) //Reset the sessionCount number 
+                sessionCount;
+                //Alter the message
+                timerComplete.innerHTML = "Session " + sessionCount + " complete! Enjoy your 5 min break :) \n Press anywhere on this bar to continue your sessions. Only" + (4 - sessionCount) + " sessions to go";
                 //To ensure the class timer_complete_message is shown dynamically, add it to the Element ID once the above conditions are met 
-                document.getElementById("timerComplete").classList.add("timerCompleteMessage");
+                timerComplete.classList.add("timerCompleteMessage");
             }
+            //Reset seconds counter back to 60 once the full minute has elapsed
             seconds1 = 60;
         }
     }
 }
-//Call setInterval function to call respective functions (minutes or seconds) to update the clock at correct times 
-//////////////////////////////////////////////
-// var minutesInterval = setInterval(minutesTimer, 60000);
-// var secondsInterval = setInterval(secondsTimer, 1000);
-// DID ABOVE TO REDFINE THE MINUTESINTERVAL VARIABLE, UNSURE WHY NOT REGISTERING
 //Call resetButton() function once the play button is hit
 resetTimerButton.addEventListener("click", resetButton);
 // If reset btn is clicked, clear the intervals 
@@ -745,21 +809,32 @@ function resetButton() {
     seconds = "00";
     pomodoro();
 }
+//Event listener so user can click the session complete message to resume the next session 
+timerComplete.addEventListener("click", ()=>{
+    //When the timer complete message is clicked, trigger the start button functionality
+    // to reset the timer to 25
+    startButton();
+    //Add the fade out animation once the user has clicked on the notification 
+    timerComplete.classList.add("timerCompleteDissolve");
+});
 
 },{}],"82z9T":[function(require,module,exports) {
 
 },{}],"2Z4jX":[function(require,module,exports) {
-var _mp3 = require("url:./public/music/*.mp3");
-var _jpeg = require("url:./public/music/images/*.jpeg");
-console.log(_mp3);
-console.log(_jpeg);
-//Create objects 
-Object.values(_jpeg).forEach((thumbnail)=>{
-    console.log(thumbnail);
-});
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+//Using the glob resolver to import multiple files at a time, rather than 
+// import each individual mp3 and jpeg file. 
+// SRC: https://parceljs.org/blog/rc0/#glob-resolver-plugin
+var _mp3 = require("url:../music/*.mp3");
+var _mp3Default = parcelHelpers.interopDefault(_mp3);
+var _jpeg = require("url:../music/images/*.jpeg");
+var _jpegDefault = parcelHelpers.interopDefault(_jpeg);
+// For debugging purposes
+// console.log(musicFiles);
+// console.log(thumbnailImages);
 //Define constants and variables to start manipulating DOM of music player
 const musicContainer = document.querySelector(".music-container");
-const playBtn = document.querySelector("#playButton");
+var playBtn = document.querySelector("#playButton");
 const prevBtn = document.querySelector("#prevButton");
 const nextBtn = document.querySelector("#nextButton");
 const musicAudio = document.querySelector("#musicAudio");
@@ -774,38 +849,201 @@ const musicArray = [
     "Rudie"
 ];
 //Index varible to help keep track of songs
-let musicIndex = 3;
+let musicIndex = 2;
 // Initially load the music info DOM by calling function
 loadMusic(musicArray[musicIndex]);
+// FUNCTIONS
 // Function to update the song details of title, audio source and cover art 
 function loadMusic(music) {
     musicTitle.innerText = music;
-    //Using the ${} template placeholder literals, access the audio file and cover art files 
-    // Use URL dependencies instead 
-    musicAudio.src = "music/${music}.mp3";
-    musicArt.src = "music/images/${music}.jpeg";
+    //Access the music and image files from the object returned by the glob resolver plugin
+    musicAudio.src = (0, _mp3Default.default)[music];
+    musicArt.src = (0, _jpegDefault.default)[music];
 }
 //Function to play music
 function playMusic() {
+    //Add the class of .play to .musicContainer
     musicContainer.classList.add("play");
+    //Once the play button is selected, switch it to a play button 
+    playBtn.querySelector("span.material-symbols-outlined").classList.remove("play_arrow");
+    playBtn.querySelector("span.material-symbols-outlined").classList.add("pause");
+    playBtn.querySelector("span.material-symbols-outlined").innerHTML = "pause";
+    //To play song, take the audio tag and select play 
+    musicAudio.play();
 }
 //Function to pause music
-function pauseMusic() {}
+function pauseMusic() {
+    //Add the class of .play to .musicContainer
+    musicContainer.classList.remove("play");
+    //Once the play button is selected, switch it to a play button 
+    playBtn.querySelector("span.material-symbols-outlined").classList.add("play_arrow");
+    playBtn.querySelector("span.material-symbols-outlined").classList.remove("pause");
+    playBtn.querySelector("span.material-symbols-outlined").innerHTML = "play_arrow";
+    //To pause song, take the audio tag and select pause
+    musicAudio.pause();
+}
+function prevMusic() {
+    //Negate musicIndex by 1 to retrieve previous song 
+    musicIndex = musicIndex - 1;
+    //Set up condition to make sure musicIndex doenst go lower than 0 
+    if (musicIndex < 0) //Shift index to the last song 
+    musicIndex = musicArray.length - 1;
+    //Call the funciton to load music with updated Index and play music 
+    loadMusic(musicArray[musicIndex]);
+    playMusic();
+}
+function nextMusic() {
+    //Incremement musicIndex by 1 to retrieve previous song 
+    musicIndex = musicIndex + 1;
+    //Set up condition to make sure musicIndex doenst go larger than the number of songs in array  
+    if (musicIndex > musicArray.length - 1) //Shift index to the first song 
+    musicIndex = 0;
+    //Call the funciton to load music with updated Index and play music 
+    loadMusic(musicArray[musicIndex]);
+    playMusic();
+}
+//Progress bar functionality 
+// updateProgress will Take in an event object called timeStamp
+// SRC: https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/timeupdate_event
+function updateProgress(timeStamp) {
+    //Collect attributes of duration of song and current time of song playing into timeStamp object 
+    const { duration , currentTime  } = timeStamp.srcElement;
+    //Calculate the proportion of the song played at each moment 
+    const progressPercent = currentTime / duration * 100;
+    // Alter the styles of the width of progress bar 
+    progressContainer.style.width = "progressPercent";
+///////////////////////////////////////////////////////////////////////////////////
+// Doesn't work, unsure how to convert the data type of progressPercent to match element width
+}
+//EVENT LISTENERS
 //Bind event listener to play button of music player 
 playBtn.addEventListener("click", function(event) {
     //Check if music is currently playing 
     const isPlaying = musicContainer.classList.contains("play");
     //If the above condition returns true in variable isPlaying, pause the music 
     // by calling pauseMusic() function  
-    if (isPlaying == true) pauseMusic();
+    if (isPlaying == true) //CHECK IF THEY ARE SWAPPED 
+    pauseMusic();
     else playMusic();
 });
+//Change song through music navigation buttons 
+prevBtn.addEventListener("click", prevMusic);
+nextBtn.addEventListener("click", nextMusic);
+// Use the 'timeupdate' event with the addEventListener API for progress bar functionality 
+// SRC: https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/timeupdate_event
+musicAudio.addEventListener("timeupdate", updateProgress);
 
-},{"url:./public/music/*.mp3":"lR8in","url:./public/music/images/*.jpeg":"iWUpZ"}],"lR8in":[function(require,module,exports) {
-module.exports = {};
+},{"url:../music/*.mp3":"6HVUr","url:../music/images/*.jpeg":"8WNbw","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6HVUr":[function(require,module,exports) {
+const _temp0 = require("url:./Boom.mp3");
+const _temp1 = require("url:./France.mp3");
+const _temp2 = require("url:./JackJ.mp3");
+const _temp3 = require("url:./Rudie.mp3");
+module.exports = {
+    "Boom": _temp0,
+    "France": _temp1,
+    "JackJ": _temp2,
+    "Rudie": _temp3
+};
 
-},{}],"iWUpZ":[function(require,module,exports) {
-module.exports = {};
+},{"url:./Boom.mp3":"83Wz5","url:./France.mp3":"cHYca","url:./JackJ.mp3":"4Kmzo","url:./Rudie.mp3":"hcVJD"}],"83Wz5":[function(require,module,exports) {
+module.exports = require("./helpers/bundle-url").getBundleURL("6BXdU") + "Boom.ab7e37ec.mp3" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"lgJ39":[function(require,module,exports) {
+"use strict";
+var bundleURL = {};
+function getBundleURLCached(id) {
+    var value = bundleURL[id];
+    if (!value) {
+        value = getBundleURL();
+        bundleURL[id] = value;
+    }
+    return value;
+}
+function getBundleURL() {
+    try {
+        throw new Error();
+    } catch (err) {
+        var matches = ("" + err.stack).match(/(https?|file|ftp|(chrome|moz)-extension):\/\/[^)\n]+/g);
+        if (matches) // The first two stack frames will be this function and getBundleURLCached.
+        // Use the 3rd one, which will be a runtime in the original bundle.
+        return getBaseURL(matches[2]);
+    }
+    return "/";
+}
+function getBaseURL(url) {
+    return ("" + url).replace(/^((?:https?|file|ftp|(chrome|moz)-extension):\/\/.+)\/[^/]+$/, "$1") + "/";
+} // TODO: Replace uses with `new URL(url).origin` when ie11 is no longer supported.
+function getOrigin(url) {
+    var matches = ("" + url).match(/(https?|file|ftp|(chrome|moz)-extension):\/\/[^/]+/);
+    if (!matches) throw new Error("Origin not found");
+    return matches[0];
+}
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+exports.getOrigin = getOrigin;
+
+},{}],"cHYca":[function(require,module,exports) {
+module.exports = require("./helpers/bundle-url").getBundleURL("6BXdU") + "France.498e2e56.mp3" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"4Kmzo":[function(require,module,exports) {
+module.exports = require("./helpers/bundle-url").getBundleURL("6BXdU") + "JackJ.857e715b.mp3" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"hcVJD":[function(require,module,exports) {
+module.exports = require("./helpers/bundle-url").getBundleURL("6BXdU") + "Rudie.6eb81f52.mp3" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"8WNbw":[function(require,module,exports) {
+const _temp0 = require("url:./Boom.jpeg");
+const _temp1 = require("url:./France.jpeg");
+const _temp2 = require("url:./JackJ.jpeg");
+const _temp3 = require("url:./Rudie.jpeg");
+module.exports = {
+    "Boom": _temp0,
+    "France": _temp1,
+    "JackJ": _temp2,
+    "Rudie": _temp3
+};
+
+},{"url:./Boom.jpeg":"gQ9dG","url:./France.jpeg":"hOciR","url:./JackJ.jpeg":"83NSj","url:./Rudie.jpeg":"hrv8B"}],"gQ9dG":[function(require,module,exports) {
+module.exports = require("./helpers/bundle-url").getBundleURL("6BXdU") + "Boom.56417d79.jpeg" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"hOciR":[function(require,module,exports) {
+module.exports = require("./helpers/bundle-url").getBundleURL("6BXdU") + "France.508000a0.jpeg" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"83NSj":[function(require,module,exports) {
+module.exports = require("./helpers/bundle-url").getBundleURL("6BXdU") + "JackJ.e82bd173.jpeg" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"hrv8B":[function(require,module,exports) {
+module.exports = require("./helpers/bundle-url").getBundleURL("6BXdU") + "Rudie.4f9693c8.jpeg" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"gkKU3":[function(require,module,exports) {
+exports.interopDefault = function(a) {
+    return a && a.__esModule ? a : {
+        default: a
+    };
+};
+exports.defineInteropFlag = function(a) {
+    Object.defineProperty(a, "__esModule", {
+        value: true
+    });
+};
+exports.exportAll = function(source, dest) {
+    Object.keys(source).forEach(function(key) {
+        if (key === "default" || key === "__esModule" || dest.hasOwnProperty(key)) return;
+        Object.defineProperty(dest, key, {
+            enumerable: true,
+            get: function() {
+                return source[key];
+            }
+        });
+    });
+    return dest;
+};
+exports.export = function(dest, destName, get) {
+    Object.defineProperty(dest, destName, {
+        enumerable: true,
+        get: get
+    });
+};
 
 },{}]},["lNJce","2OD7o"], "2OD7o", "parcelRequire60da")
 

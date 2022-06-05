@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>StudBud</title>
+
+  <!-- Link to favicon  -->
+  <link rel="icon" type="image/x-icon" href="/Favicon.41b8ec00.png">
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <meta name="description" content="">
+
+  <!-- Link to Google Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!-- Link to Google Fonts  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Genos:ital,wght@0,400;0,500;1,400;1,500&family=Nunito:wght@200;300;400;500;700&family=Oswald:wght@400;500&family=Pragati+Narrow:wght@400;700&family=Puritan:wght@400;700&family=Teko:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,1,0">
+
+
+
+  <!-- Link to stylesheet  -->
+  <link rel="stylesheet" href="/index.c74267d1.css">
+
+</head>
+
+<body>
+    <div class="header">
+
+        <!-- Logo -->
+        <a href="/index.html" class="logo">
+          <img src="/Studbud_Logo.504393d8.png" alt="StudBud Logo">
+        </a>
+      </div>
+    
+      <nav class="nav-bar">  
+    
+        <div class="nav-title"> 
+          <!-- Active class to determine where the toggle bar will be  -->
+          <!-- <h3 class = "active">HOME</h3> -->
+          <a href="/index.html" id="homeNavBtn">HOME</a>
+    
+          <a href="/apps.html" id="appsNavBtn">APPS</a>
+    
+    
+        </div> 
+    
+        <!-- <div id = "nav-toggle"> </div> -->
+        <div id="nav-line"> </div>  
+      
+      </nav>
+
+      <div class="row-apps">
+
+        <div id="#column1-apps">
+          <!-- Music player  -->
+          <h3>MUSIC PLAYER</h3>
+      
+          <!-- Div for the entire music container -->
+          <!-- Play class to signify the music is playing -->
+          <div class="music-container">
+      
+            <div class="music-info">
+              <!-- Music Title -->
+              <h4 id="musicTitle"></h4>
+      
+              <!-- Music Artwork container  -->
+            <div class="musicArtContainer">
+              <!-- Include alt text for users with screen readers  -->
+              <!-- <img src="music/images/JackJ.jpeg" alt="Music Cover Art" id="musicArt"> -->
+              <img alt="Music Cover Art" id="musicArt">
+            </div>
+      
+          </div>
+      
+            <!-- Audio file for the music -->
+            <audio scr="music/JackJ.mp3" id="musicAudio"></audio>
+      
+            
+            <!-- Navigation bar to control the music  -->
+            <div class="musicNav">
+      
+              <!-- Progress bar of the music  -->
+              <div class="musicProgressContainer">
+                <div class="musicProgress"></div>
+              </div>
+      
+              <div class="musicNavButton">
+                <!-- Previous song button -->
+                <button id="prevButton" class="musicActionButton">
+                  <span class="material-symbols-outlined">fast_rewind </span>
+                </button>
+      
+                <!-- Pause and Play Button  -->
+                <button id="playButton" class="musicActionButton actionButtonBig">
+                  <span class="material-symbols-outlined play_arrow">play_arrow </span>
+                </button>
+      
+                <!-- Next song button -->
+                <button id="nextButton" class="musicActionButton">
+                  <span class="material-symbols-outlined">fast_forward </span>
+                </button>
+            </div>
+              
+            </div>
+      
+          </div>
+          
+      
+        </div> 
+      
+        <div id="#column2-apps">
+
+      
+        </div> 
+      
+      </div>
+</body>
+
+<script src="/index.3b06b0f7.js" defer=""></script>
+<!-- Unsure why the javascript is not loading for the apps.html file -->
+<script src="./components/music.js" defer=""></script>
+</html>

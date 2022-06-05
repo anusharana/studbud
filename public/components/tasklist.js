@@ -6,8 +6,6 @@
 
 // Create const variables to get elements from HTML 
 const form = document.getElementById("taskform");
-// const button = document.querySelector("#taskform > button");
-// WHy doesnt the bellow work? 
 const subButton = document.getElementById("itemSubmit");
 
 // Create variabales to dynamicly store task input info
@@ -28,24 +26,19 @@ var completionTimeInput = document.getElementById("completionTimeInput");
 subButton.addEventListener("click", function(event) {
   event.preventDefault();
   
-  //Get the value of the 
-  // let task = taskInput.value;
+  //Get the value of the task description from object 
   let taskDescription = taskInput.value;
   let dueDate = dueDateInput.value;
-  // let completionTime = completionTimeInput.value; not used 
-  // let estimatedTime = estimatedTimeInput.value; ///// not used 
 
   //Options is an array of the drop down options, use selectedIndex to access the user's selected option
   // and store in variable priorityRating
-  let priorityRating = priorityInput.options[priorityInput.selectedIndex].value;
-  // let subjectSelect = subjectSelectInput.options[subjectSelectInput.selectedIndex].value;
+  var priorityRating = priorityInput.options[priorityInput.selectedIndex].value;
 
   
   //Call addTask function
-  // addTask(task, dueDate, estimatedTime, priorityRating, false);
   addTask(taskDescription, dueDate, priorityRating, false);
   
-  // console.log(taskList);
+  console.log(taskList);
 
 });
 
@@ -79,49 +72,55 @@ function addTask(taskDescription, dueDate, priorityRating, completionStatus) {
 }
 
 function renderTask(task) {
-  //Create HTML elements 
+  //Create HTML elements for task and task attributes 
 
-  //This is a list item to populate the unordered list made in HTML file 
-
-  //COME BACK //// Create ablock element and elements within it? 
-  var itemBlock = document.createElement("div");
+  // var itemBlock = document.createElement("div");
   let itemDescription = document.createElement("span");
+  itemDescription.setAttribute('class', 'taskItem');
+  //Use javascript attribute dragable to allow for draggable funcitonality withit kanban board 
+  itemDescription.setAttribute('draggable', 'true');
   itemDescription.innerHTML = '<p>' + task.taskDescription + '</p>';
+
+  ////////////////////////////////////////////////////////////////////////////////
+  // Code not working here - would appreciate feedback 
+  ////////////////////////////////////////////////////////////////////////////////
+  //Select the first direct decendent <p> tag of <span> tag in.taskItem 
+  // let descriptionStyle = document.querySelector('span + p');
+  // descriptionStyle.setAttribute('class','taskTitle');
 
   // Task list is the array, wach element holds an object 
   taskList.appendChild(itemDescription);
-  // itemBlock.appendChild(itemDescription);
 
+  // Priotity rating 
+  let priorityScale  = document.createElement("p");
+  priorityScale.setAttribute('class', 'priorityAtt');
+  priorityScale.innerHTML = '<p>' + task.priorityRating + '</p>';
+  itemDescription.appendChild(priorityScale);
+  //Call function to style priority
+  // priorityStyling();
 
-  ////////////////////////////////////////////////////////////////////////////////
-  //Add attributes like subject, date and priority here 
-  ////////////////////////////////////////////////////////////////////////////////
+ 
 
-  // Create HTML element of the task attributes 
-  var taskAttSection = document.createElement('div');
-
-
-  //Create HTML section for the buttons in the itemBlock
-  //COME BACK 
-  var taskButton = document.createElement('div');
+  // Due Date 
+  let dueDateAtt  = document.createElement("p");
+  dueDateAtt.setAttribute('class', 'dueDateAtt');
+  dueDateAtt.innerHTML = '<p>' + task.dueDate + '</p>';
+  itemDescription.appendChild(dueDateAtt);
 
   //Create HTML element of Delete Button 
   let delButton = document.createElement('button');
   delButton.setAttribute('id', 'delButton');
   let delButtonText = document.createTextNode('X');
-  // COME BACK - CODE BREAKS WHEN BELOW CODE IS IMPLEMENTED 
-  // delButtonText.setAttribute('id', 'delButtonText');
   
   //Append the text to the button element 
   delButton.appendChild(delButtonText);
-  //for button to appear on the screen, append button to the item we created
-      //itemBlock??
   itemDescription.appendChild(delButton);
+  // taskList.appendChild(delButton);
+
 
   //Event listeners for DOM elements 
   delButton.addEventListener('click', function (event) {
     event.preventDefault();
-    //itemBlock??
     itemDescription.remove();
   });
 
@@ -133,18 +132,10 @@ function renderTask(task) {
   itemDescription.appendChild(checkBox);
 
 
-
-
   //Clear the input form once a task has been added to the kanban board 
   form.reset();
 
-  //Create HTML element of Complete Button 
-  // Alter the completion status attribute of object 
-  // intertwine logic with progress bar 
-  // completionStatus = true;
-
-  //Condition to check whether a task has been added yet
-  /////////// come back - MAKE THIS DYNAMIC 
+  //Condition to show prompt for users by checking whether a task has been added yet
   if (taskListArray.length >= 1) {
     
     //Set display to none to remove prompt in task list section 
@@ -158,18 +149,122 @@ function renderTask(task) {
 
 
 }
+//////////////////////////////////////////////////////
+// Code is doesn't work - feedback would be appreciated 
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+//Progress Bar Calculations 
+//////////////////////////////////////////////////////
+// Code is faulty, please give feedback on how to code this 
 
-//Fill the progress bar based on whether the check button has been selected
-//HOW TO STORE THE NUMBER OF TASKS & NUMBER OF BOXES CHECKED FOR PROGRESS BAR
+let totalTasks = taskListArray.length;
+var percentageTaskComplete = 0;
+let markedTaskCount = 0;
 
-//
-var totalTasks = taskListArray.length;
+function checkMarkedTasks () {
+  //For loop to go through all tasks 
+  for (i = 0; i < taskListArray.length + 1; i++) {
+
+      // If checkbox is marked, change completionStatus to true 
+
+    if (task.completionStatus == true) {
+      //Add styling here 
+
+      markedTaskCount ++;
+
+    }
+  }
+
+}
 
 
-//Condition to check if the checkbox attribute is checked 
-// How to do this for many tasks?? 
-// select from an array 
+function calculateProgressBar () {
 
-// var checked = document.querySelector('tasklist > div ...);
-// loop through the task list array - how ot make this dynamic?? 
-//if
+  //If task array length is 0, return 0 percent complete
+  if (totalTasks == 0) {
+    percentageTaskComplete = 0;
+
+  } else {
+    percentageTaskComplete = (markedTaskCount / totalTasks)*100;
+    // Alter the styles of the width of progress bar 
+    document.querySelector(".progressBarMeasure").style.width = 'percentageTaskComplete';
+
+  }
+
+
+}
+
+//////////////////////////////////////////////////////
+// Code here doesn't work - feedback would be appreciated 
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+//Drag and drop functionality for kanban board 
+//////////////////////////////////////////////////////
+
+// Code for the drag and drop funcitonality for the taskItem components 
+// SRC: https://www.geeksforgeeks.org/html-draggable-attribute/
+var draggableItem = document.querySelectorAll('.draggable');
+// Select the element where the draggabe item can be stored
+var kanbanBoard = document.querySelector('.board');
+
+
+// Event listener for all draggable elements 
+// Using arrow function for event listener call back method
+// SRC: https://developpaper.com/how-to-use-the-arrow-function-as-a-callback-to-the-event-listener/
+// draggableItem.forEach(draggableItem => {
+
+//   // When the draggable element is picked up by cursor, add class for styling 
+//   draggable.addEventListener('dragStart', () => {
+//     draggable.classList.add('draggingCurrent');
+
+//   });
+//   //When draggable element is dropped, remove the pick u styling 
+//   draggable.addEventListener('dragEnd', () => {
+//     draggable.classList.remove('draggingCurrent');
+
+//   });
+
+
+
+// ////////////////////////////////////////////////////////////////////////////////
+// // Create a funciton to allow the task item to be shifted in the order of the <ul> 
+// // SRC: https://betterprogramming.pub/create-a-sortable-list-with-draggable-items-using-javascript-9ef38f96b258
+// // Call this below function in renderTasks() ?
+// // COME BACK HERE - UNFINISHED CODE 
+// ////////////////////////////////////////////////////////////////////////////////
+
+
+// });
+
+
+//////////////////////////////////////////////////////
+// Code here doesn't work - feedback would be appreciated 
+///////////////////////////////////////////////////////
+//Function which determines the styling of the priority rating
+// function priorityStyling() {
+
+//   //Switch statement to determine which stylings to add 
+//   var priorityStylingClass;
+//   switch (priorityStylingClass) {
+//     //Cases are the potential variable held by priorityRating
+//     case "Low" :
+//       //Add styling of priority rating to PR element 
+//       // priorityScale.classList.add('priorityAttLow');
+//       priorityStylingClass = priorityAttLow;
+//       break;
+//     case "Medium" :
+//       // priorityScale.classList.add('priorityAttMed');
+//       priorityStylingClass = priorityAttMed;
+//       break;
+//     case "High" :
+//       // priorityScale.classList.add('priorityAttHigh');
+//       priorityStylingClass = priorityAttHigh;
+//       break;
+
+//   }
+
+//   //Add the styling class based on what the variable priorityStylingClass has stored 
+//   priorityScale.classList.add('priorityStylingClass');
+
+
+// }
